@@ -1,9 +1,9 @@
 class Breakfast extends Meal{
 
   public Breakfast(){
-    super();
+    super("Breakfast", "0730");
   }
-
+  
 
 
 

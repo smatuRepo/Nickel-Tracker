@@ -4,9 +4,9 @@ class Food{
 
   String name;
   double nickel;
-  //value of constants TBD
-  double high = 70.0;
-  double low = 25.0;
+  //value of constants done
+  double high = 20.0; //micrograms/gram
+  double low = 10.0;
 
   /*
   constructor for food class, should be instantiated

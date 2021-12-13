@@ -1,16 +1,15 @@
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 
 class Main{
 
 
   public static void main(String[] args) {
-
-    JFrame main = new JFrame("[app name]");
-    double userThresh; //TBD, what should default be
+    
+    Scanner temp = new Scanner(System.in);
+    //JFrame main = new JFrame("[app name]");
 
     //read current file contents
     //create place to store Food objects
@@ -19,16 +18,87 @@ class Main{
       System.out.println(i.name + i.nickel);
     }
 
+    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (-1 if not): ");
+    double userThresh = getPosDouble(temp);
+
+
+    //main menu
+    //init meals
+    Breakfast brek = new Breakfast();
+    Lunch lunc = new Lunch();
+    Dinner din = new Dinner();
+    ArrayList<Snack> snaks = new ArrayList<Snack>();
+
+    String decide;
+    do{
+      System.out.println("What meal you eat?\nB: Breakfast\nL: Lunch\nD: Dinner\nS: Snack\nE: Finished");
+      decide = temp.nextLine();
+
+      switch(decide){
+        case("B"): //breakfast
+          brek.addFood();
+          break;
+        case("L"): //lunch
+          lunc.addFood();
+          break;
+        case("D"): //dinner
+          din.addFood();
+          break;
+        case("S"): //new snack, add to arraylist
+          Snack snak = new Snack();
+          snak.addFood();
+          snaks.add(snak);
+          break;
+        default:
+          System.out.println("Not a meal");
+      }
+    }while(!(decide.equals("E")));
+
+    //put meals together, add snacks too.
+    ArrayList<Meal> allMeals = new ArrayList<Meal>();
+    allMeals.add(brek);
+    allMeals.add(lunc);
+    allMeals.add(din);
+    //parse snaks, add
+    for(Snack i: snaks){
+      allMeals.add(i);
+    }
+    allMeals.sort(); //sort by time
+
+    //output foods, tally nickel
+    double allNickel = 0.0;
+
+    for(Meal i: allMeals){
+      System.out.print(i.time + ": " + i.title + "\n\t");
+
+        for(Food x: i.allFoods){
+          System.out.print(x + " "); 
+        }
+      allNickel += i.tallyNickel();
+    }
+
+    System.out.println("You ate " + allNickel + " micrograms of nickel.");
+
+    System.out.println(advice(allMeals, userThresh, allNickel));
+    
+    /*removed for NOW, gui too hard
     //create main jframe, make starting frame
     //JFrame main = new JFrame("Intro");
     //jframe attriutes
     main.setSize(500,300);
     main.setVisible(true);
     main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    main.setLayout(new FlowLayout());
 
-    userThresh = new Intro(main).getThresh();
+    Intro introScreen = new Intro(main);
+    
+    System.out.println(userThresh);
+    */
     
   }
+
+
+
 
 
   //HELPER METHODS
@@ -66,6 +136,39 @@ class Main{
 
     return allFood;
   }
+
+
+  /*
+  gives advice based on what foods eaten
+  @param foodList - complete arraylist of meals for analysis
+  @return help - string of advice for next day
+  */
+  private static String advice(ArrayList<Meal> allFood, double threshhold, double fullTally){
+    
+    //ArrayList<double> mealNickels = new ArrayList<double>();
+
+    for(Meal i: allFood){
+      mealNickels.add(i.tallyNickel());
+    }
+
+    if (fullTally <= threshhold){
+      return "Great!";
+    }else{
+
+
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
   /*
   Asks for (+) int input, gets input
   @param keyboard - Scanner, will not be closed
