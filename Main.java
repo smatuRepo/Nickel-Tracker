@@ -18,8 +18,12 @@ class Main{
       System.out.println(i.name + i.nickel);
     }
 
-    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (-1 if not): ");
+    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (0 if not): ");
     double userThresh = getPosDouble(temp);
+    if(userThresh == 0){
+      userThresh = 80.0;
+    }
+     
 
 
     //main menu
@@ -45,7 +49,7 @@ class Main{
           din.addFood();
           break;
         case("S"): //new snack, add to arraylist
-          Snack snak = new Snack();
+          Snack snak = new Snack("0123");
           snak.addFood();
           snaks.add(snak);
           break;
@@ -63,8 +67,19 @@ class Main{
     for(Snack i: snaks){
       allMeals.add(i);
     }
-    allMeals.sort(); //sort by time
 
+    Meal[] tempMeal = allMeals.toArray(new Meal[0]); //let it be sorted
+
+    Arrays.sort(tempMeal, new Comparator<Meal>(){
+      @Override //sort based on time
+      public int compare(Meal m1, Meal m2){
+        return m1.time.compareTo(m2.time);
+      }
+    });
+
+    //set back to ArrayList
+    allMeals = new ArrayList<Meal>(Arrays.asList(tempMeal));
+    
     //output foods, tally nickel
     double allNickel = 0.0;
 
@@ -95,6 +110,12 @@ class Main{
     System.out.println(userThresh);
     */
     
+
+
+
+
+
+    temp.close();
   }
 
 
@@ -145,7 +166,7 @@ class Main{
   */
   private static String advice(ArrayList<Meal> allFood, double threshhold, double fullTally){
     
-    //ArrayList<double> mealNickels = new ArrayList<double>();
+    ArrayList<Double> mealNickels = new ArrayList<Double>();
 
     for(Meal i: allFood){
       mealNickels.add(i.tallyNickel());
@@ -156,7 +177,7 @@ class Main{
     }else{
 
 
-
+      return "sotp";
 
     }
   }
@@ -169,29 +190,7 @@ class Main{
 
 
 
-  /*
-  Asks for (+) int input, gets input
-  @param keyboard - Scanner, will not be closed
-  @return input - int input (+)
-  */
-  private static int getPosInt(Scanner keyboard){
-
-    System.out.print("Enter a positive integer: ");
-    int input;
-    do{
-      try{
-        input = Integer.parseInt(keyboard.nextLine());        
-        if(input >= 0){ //if positive, end
-          return input;
-        }else{
-          System.out.print("Value must be positive, retry: ");
-        }
-      }catch(NumberFormatException ex){
-        System.out.print("Invalid input, retry: ");
-        continue; //retry
-      }
-    }while(true); //does not exit until valid input reached
-  }
+  
 
 
   /*

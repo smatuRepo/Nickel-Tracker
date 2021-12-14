@@ -10,13 +10,13 @@ class Snack extends Meal{
     super("Snacks", snackTime);
   }
 
-  
+  /* for Simon-
   private String whatTime()
   {
     System.out.print("What is the time? (Military time): ");
     return validTime(keb.nextLine());
   }
-/*
+
   private String validTime ()
   {
     String str = snackTime;
