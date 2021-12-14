@@ -18,7 +18,7 @@ class Main{
       System.out.println(i.name + i.nickel);
     }
 
-    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (0 if not): ");
+    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (0 if not) \n");
     double userThresh = getPosDouble(temp);
     if(userThresh == 0){
       userThresh = 80.0;
@@ -31,7 +31,7 @@ class Main{
     Breakfast brek = new Breakfast();
     Lunch lunc = new Lunch();
     Dinner din = new Dinner();
-    ArrayList<Snack> snaks = new ArrayList<Snack>();
+    ArrayList<Snack> snax = new ArrayList<Snack>();
 
     String decide;
     do{
@@ -40,18 +40,18 @@ class Main{
 
       switch(decide){
         case("B"): //breakfast
-          brek.addFood();
+          brek.addFood(foodDB);
           break;
         case("L"): //lunch
-          lunc.addFood();
+          lunc.addFood(foodDB);
           break;
         case("D"): //dinner
-          din.addFood();
+          din.addFood(foodDB);
           break;
         case("S"): //new snack, add to arraylist
-          Snack snak = new Snack("0123");
-          snak.addFood();
-          snaks.add(snak);
+          Snack snak = new Snack(validTime(temp));
+          snak.addFood(foodDB);
+          snax.add(snak);
           break;
         default:
           System.out.println("Not a meal");
@@ -63,8 +63,8 @@ class Main{
     allMeals.add(brek);
     allMeals.add(lunc);
     allMeals.add(din);
-    //parse snaks, add
-    for(Snack i: snaks){
+    //parse snax, add
+    for(Snack i: snax){
       allMeals.add(i);
     }
 
@@ -84,12 +84,12 @@ class Main{
     double allNickel = 0.0;
 
     for(Meal i: allMeals){
-      System.out.print(i.time + ": " + i.title + "\n\t");
-
-        for(Food x: i.allFoods){
-          System.out.print(x + " "); 
+      System.out.println(i.time + ": " + i.title); //debug
+        for(Food x: i.mealFoods){
+          System.out.print(x.name + " "); 
         }
-      allNickel += i.tallyNickel();
+      System.out.print("\n");
+      allNickel += i.tallyNickel(); //the tally
     }
 
     System.out.println("You ate " + allNickel + " micrograms of nickel.");
@@ -109,11 +109,6 @@ class Main{
     
     System.out.println(userThresh);
     */
-    
-
-
-
-
 
     temp.close();
   }
@@ -184,15 +179,6 @@ class Main{
 
 
 
-
-
-
-
-
-
-  
-
-
   /*
   Asks for (+) decimal input, gets input
   @param keyboard - Scanner, will not be closed
@@ -217,4 +203,47 @@ class Main{
     }while(true); //does not exit until valid input reached
   }
 
+
+  /*
+  bulletproofing of time string for Snack constructor
+  SHOULD USE GUI LATER - maybe pop-up window?
+  @param keeb - scanner, is not modified
+  @return valid time string - HH:MM, user input, 24-hr time
+  */
+  private static String validTime(Scanner keeb){
+    
+    while(true){
+      try{
+        System.out.println("Input time, 00:00-23:59:"); //input time
+        String time = keeb.nextLine();
+        
+        if(time.length() != 5){//prevent index OOB except
+          System.out.println("input is too long or short");
+          continue;//retry
+        }else if(time.charAt(2)!= ':'){
+          System.out.println("3rd character must be a \':\'");
+          continue;
+        }else if(Integer.parseInt(time.substring(0,2)) < 0 || Integer.parseInt(time.substring(0,2)) > 23){
+          System.out.println("invalid hours");
+          continue;
+        }else if(Integer.parseInt(time.substring(3,5)) < 0 || Integer.parseInt(time.substring(3,5)) > 59){
+          System.out.println("invalid minutes");
+          continue;
+        }else if(time.charAt(0) == '-' || time.charAt(3) == '-'){
+          System.out.println("Cannot be -0");
+          continue;
+        }
+
+
+        return time; //basically else
+
+      }catch(NumberFormatException numberFormatException){
+        System.out.println("HH:MM, HH is integer between 00-23, MM between 00-59");
+        continue;
+      //}catch(IndexOutOfBoundsException oob){
+      //  System.out.println("oob");
+      }
+    }
+
+  }
 }

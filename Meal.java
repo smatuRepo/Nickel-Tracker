@@ -10,10 +10,11 @@ class Meal{
   String nameFood;
   int numFoods;  
   String yn;
-  int foodinfo;
+  //int foodinfo;
   String title ;
   String time;
-  ArrayList<Food> allFoods = new ArrayList <Food>();
+  ArrayList<Food> mealFoods = new ArrayList <Food>();
+  int tempIndex;
 
   //constructor
   public Meal(String title, String time)
@@ -26,49 +27,54 @@ class Meal{
 
   /*
   adds food to Meal's food arraylist, should implement GUI later
-  no param, void. changes obj attributes 
+  @param theDB - arraylist foods, database
+  void. changes obj attributes 
   */
-  public void addFood()
+  public void addFood(ArrayList<Food> theDB)
   {
     System.out.print ("Food?: ");
     nameFood = keebs.nextLine();
 
 
     //READ file, compare to input
-    if(searchDB(nameFood)){
+    if(searchDB(nameFood,theDB)){//add to array
       System.out.print ("Number of servings?: ");
       numFoods = getPosInt(keebs);
 
-      if (numFoods == 0)
-      {
-
-      }//checks the readline from the database code comparing the number of servings
-      else {
-
+      //for each serving, add 1 of food to mealFoods
+      for(int i = 0;i<numFoods;i++){
+        mealFoods.add(theDB.get(tempIndex));
       }
 
-    }else{
-
-
-
+    }else{//add to DB instead, if doesnt exist
+      addToDB(nameFood, theDB);
     }
 
 
     
   }
 
-  //tallynickel
+  /*
+  Finds total Nickel in the arraylist of Foods
+  Returns the count value
+  */
   public double tallyNickel()
   {
     double count = 0.0;
-    for (Food i: allFoods)
+    for (Food i: mealFoods)
       count += i.nickel;
     return count;
   }
 
 
-  //addtodb
-  private void addToDB(String newName)
+  /*
+  The name of the food is added to the txt file database
+  Also adds the nickel amount to the database
+  @param newName - user input name, not in DB already, LOWERCASE
+  @param theDB - the database, arraylist foods
+  @return theDB, modified (if user says Yes) - 1 new food added
+  */
+  private ArrayList<Food> addToDB(String newName, ArrayList<Food> theDB)
   {
     
     System.out.println ("Input Doesn't Compute");
@@ -76,16 +82,42 @@ class Meal{
     yn = keebs.nextLine();
 
      
-    if (yn.equals ("Yes"))
+    if (yn.toLowerCase().equals ("y"))
     {
       System.out.print ("What is the nickel amount?: ");
-      foodinfo = Integer.parseInt(keebs.nextLine());
+      double foodInfo = Integer.parseInt(keebs.nextLine());
+
+      //modify arg, add to mealarray
+      theDB.add(new Food(newName,foodInfo));
+      mealFoods.add(new Food(newName, foodInfo));
+
+      //REWRITE all db contents to file
+      try {
+      //connect to file, buffer
+      FileWriter writer = new FileWriter("database.txt");
+      BufferedWriter buffer = new BufferedWriter(writer);
+
+      //write lines w/ buffer 
+      for(Food x:theDB){
+        buffer.write(x.name);
+        buffer.newLine();
+        buffer.write("" + x.nickel);
+        buffer.newLine();
+      }
+     
+      
+      buffer.close(); //close
+      writer.close();
+    }catch(Exception ex){
+      System.out.println(ex.getMessage());
+    }//end write
 
 
-      //write newName, foodInfo to file
+      
+
 
     }
-
+    return theDB;
   }
 
 
@@ -93,41 +125,21 @@ class Meal{
   /*
   linear search of DB txt file, 
   check if string is == to title of food in file
+  creates new Food obj of what it finds
   @param input - string, to be compared
+  @param theDB - arraylist foods, what the total is
   @return boolean - true if in file/DB
   */
-  private boolean searchDB(String input){
+  private boolean searchDB(String input, ArrayList<Food> theDB){
 
-    try {
-      //connect to file, buffer - INIT
-      FileReader reader = new FileReader("database.txt");
-      BufferedReader rBuffer = new BufferedReader(reader);
-
-      String newLine1; //foodname
-      String newLine2; //nickel content - blank, to be skipped
-
-      do{
-        //System.out.println(newLine); debug
-        newLine1 = rBuffer.readLine(); //read name (1st line)
-        newLine2 = rBuffer.readLine(); //read 2nd line, blank
-
-        //main bit, check
-        if(newLine1 != null){
-          if(input.equals(newLine1)){
-              reader.close(); //end
-              rBuffer.close();
-              return true; //IS IN FILE
-          }
-        } //check if not EoF
-      }while (newLine1 != null);
-      
-      
-    }catch(Exception ex){
-      //System.out.println(ex.getMessage());
-    }//end READ
-
-    //rBuffer.close();
-    return false;
+    for(Food i:theDB){
+      if(input.equals(i.name)){
+        tempIndex = theDB.indexOf(i);
+        return true;
+      }
+    }
+    
+    return false;//else
   }
 
 
@@ -138,7 +150,7 @@ class Meal{
   @param keyboard - Scanner, will not be closed
   @return input - int input (+)
   */
-  public static int getPosInt(Scanner keyboard){
+  private static int getPosInt(Scanner keyboard){
 
     System.out.print("Enter a positive integer: ");
     int input;

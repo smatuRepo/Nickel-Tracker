@@ -1,4 +1,6 @@
-banan 
-25
-ree 
-67
+asdf
+10.0
+esdf
+15.0
+qwert
+69.0

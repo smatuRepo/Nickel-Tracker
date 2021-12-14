@@ -1,5 +1,3 @@
 class Lunch extends Meal{
-  
-public Lunch(){ super("Lunch", "1230"); }
-
+public Lunch(){ super("Lunch", "12:30"); }
 }
