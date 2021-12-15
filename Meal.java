@@ -8,14 +8,12 @@ class Meal{
 
   Scanner keebs = new Scanner (System.in);
 
-  String nameFood;
-  int numFoods;  
-  String yn;
-  //int foodinfo;
-  String title ;
+  //init vars
+  int tempIndex; //for use b/n addfood, searchdb
+  String title;
   String time;
   ArrayList<Food> mealFoods = new ArrayList <Food>();
-  int tempIndex;
+  
 
   /*
   constructor for Meal, initiallize name, time
@@ -39,13 +37,13 @@ class Meal{
   public void addFood(ArrayList<Food> theDB)
   {
     System.out.print ("Food?: ");
-    nameFood = keebs.nextLine();
+    String nameFood = keebs.nextLine();
 
 
     //READ file, compare to input
     if(searchDB(nameFood,theDB)){//add to array
       System.out.print ("Number of servings?: ");
-      numFoods = getPosInt(keebs);
+      int numFoods = getPosInt(keebs);
 
       //for each serving, add 1 of food to mealFoods
       for(int i = 0;i<numFoods;i++){
@@ -84,8 +82,8 @@ class Meal{
   {
     
     System.out.println ("Input Doesn't Compute");
-    System.out.println ("Would you like to add it to the database");
-    yn = keebs.nextLine();
+    System.out.println ("Would you like to add it to the database (y/n)");
+    String yn = keebs.nextLine();
 
      
     if (yn.toLowerCase().equals ("y"))

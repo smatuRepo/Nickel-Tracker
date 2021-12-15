@@ -1,10 +1,15 @@
+/*
+Jonathan, Simon
+Nickel Tracker: Tracker of Nickel
+Nov. 15, 2021 - Jan. 26, 2021 part 2
+*/
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
 class Main{
-
 
   public static void main(String[] args) {
     
@@ -115,9 +120,6 @@ class Main{
   }
 
 
-
-
-
   //HELPER METHODS
 
 
@@ -156,29 +158,87 @@ class Main{
 
 
   /*
-  //to be finished, needs GUI
   gives advice based on what foods eaten
-  @param foodList - complete arraylist of meals for analysis
+  @param allFood - complete arraylist of meals for analysis
+  @param threshhold - double, if over thresh, check what user could do
+  @param fullTally - double, allFood.tallyNickel
   @return help - string of advice for next day
   */
   private static String advice(ArrayList<Meal> allFood, double threshhold, double fullTally){
     
-    ArrayList<Double> mealNickels = new ArrayList<Double>();
+    //init vars
+    ArrayList<Food> foodList = new ArrayList<Food>();
+    Meal mostNickel = new Meal("","0");
+    Food modeFood;
+    int snackCount = 0;
+
 
     for(Meal i: allFood){
-      mealNickels.add(i.tallyNickel());
+
+      for(Food x:i.mealFoods){
+        foodList.add(x); //make full food ArrayList from each meal
+      }
+      if(i.tallyNickel() > mostNickel.tallyNickel()){
+        mostNickel = i; //find max
+      }
+
+      if(i.title.equals("Snacks")){
+        snackCount++; //check if too many snacks
+      }
+
     }
 
     if (fullTally <= threshhold){
-      return "Great!";
-    }else{
+      return "Everything's under control. Nice!";
 
+    }else{//if over thresh
 
-      return "sotp";
+      if(mostNickel.title.equals("Snack") || snackCount > 3){//if largest meal was snack or lots of snacks
+        return "Eat less nickel during snacks";
+
+      }else if(foodMode(foodList).nickel > threshhold/3){//if most common food large
+        return "Eat less " + foodMode(foodList).name;
+
+      }else if(mostNickel.tallyNickel() > threshhold/2){//if largest meal big
+        modeFood = foodMode(mostNickel.mealFoods);
+        return "Eat less nickel during " + mostNickel.title + ", particularly " + modeFood.name + ".";
+
+      }else{//replace?
+        return "Eat less foods high in nickel";
+      }
 
     }
   }
+  
 
+  /*
+  calculates most common food in arraylist
+  @param theFoods - arraylist of foods, items will be counted
+  @return most common Food times # servings
+  */
+  private static Food foodMode(ArrayList<Food> theFoods) {
+
+    Food mode = new Food("",0);
+    int maxCount = 0;
+    int x;
+
+    //loop thru array, check each mode
+    for(x = 0; x < theFoods.size(); ++x) {
+        int count = 0; //reset
+
+        for (int y = 0; y < theFoods.size(); ++y) {
+          if (theFoods.get(y).name.equals(theFoods.get(x).name)){ //if same food
+          ++count; 
+          }
+        }
+
+        if (count > maxCount) {
+          maxCount = count; //save value if it mode so far
+          mode = theFoods.get(x);
+        }
+    }
+    return new Food(mode.name,mode.nickel * maxCount); //mode w/ serving size times nickel
+  }
 
 
   /*
