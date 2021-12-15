@@ -3,6 +3,7 @@ import java.io.*;
 
 
 class Meal{
+
   //declare attributes
 
   Scanner keebs = new Scanner (System.in);
@@ -16,7 +17,12 @@ class Meal{
   ArrayList<Food> mealFoods = new ArrayList <Food>();
   int tempIndex;
 
-  //constructor
+  /*
+  constructor for Meal, initiallize name, time
+  @param title - name of meal
+  @param time - formatted HH:MM, 24-hr clock
+  void.
+  */
   public Meal(String title, String time)
   {
     this.title = title;
@@ -56,7 +62,7 @@ class Meal{
 
   /*
   Finds total Nickel in the arraylist of Foods
-  Returns the count value
+  @return the count value, double
   */
   public double tallyNickel()
   {
@@ -94,16 +100,15 @@ class Meal{
       //REWRITE all db contents to file
       try {
       //connect to file, buffer
-      FileWriter writer = new FileWriter("database.txt");
+      FileWriter writer = new FileWriter("database.txt",true); //2nd arg lets it APPEND, not clear the file
       BufferedWriter buffer = new BufferedWriter(writer);
 
-      //write lines w/ buffer 
-      for(Food x:theDB){
-        buffer.write(x.name);
-        buffer.newLine();
-        buffer.write("" + x.nickel);
-        buffer.newLine();
-      }
+      //write new lines w/ buffer 
+      buffer.write(newName);
+      buffer.newLine();
+      buffer.write("" + foodInfo);
+      buffer.newLine();
+      
      
       
       buffer.close(); //close
@@ -113,11 +118,8 @@ class Meal{
     }//end write
 
 
-      
-
-
     }
-    return theDB;
+    return theDB; //regardless of if modified or not
   }
 
 
@@ -135,7 +137,7 @@ class Meal{
     for(Food i:theDB){
       if(input.equals(i.name)){
         tempIndex = theDB.indexOf(i);
-        return true;
+        return true; //food name is in DB
       }
     }
     

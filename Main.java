@@ -15,13 +15,14 @@ class Main{
     //create place to store Food objects
     ArrayList<Food> foodDB = readDB(new ArrayList<Food>());
     for(Food i: foodDB){
-      System.out.println(i.name + i.nickel);
+      System.out.println(i.name +", "+ i.nickel);
     }
 
-    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel you can have in a day before feeling sick? (0 if not) \n");
+    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a day before feeling sick? (0 if not) \n");
     double userThresh = getPosDouble(temp);
+
     if(userThresh == 0){
-      userThresh = 80.0;
+      userThresh = 150.0; //official
     }
      
 
@@ -155,6 +156,7 @@ class Main{
 
 
   /*
+  //to be finished, needs GUI
   gives advice based on what foods eaten
   @param foodList - complete arraylist of meals for analysis
   @return help - string of advice for next day

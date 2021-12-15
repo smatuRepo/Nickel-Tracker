@@ -1,6 +1,8 @@
-asdf
-10.0
-esdf
-15.0
-qwert
-69.0
+ban
+10
+app
+35
+pot
+100
+red
+11.0
