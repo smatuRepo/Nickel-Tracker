@@ -8,3 +8,11 @@ red
 11.0
 kiwi
 22.0
+Fries
+12.0
+Ramon Noodles
+15.0
+Cookies
+10.0
+apples
+0.24

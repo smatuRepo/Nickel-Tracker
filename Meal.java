@@ -89,7 +89,8 @@ class Meal{
     if (yn.toLowerCase().equals ("y"))
     {
       System.out.print ("What is the nickel amount?: ");
-      double foodInfo = Integer.parseInt(keebs.nextLine());
+      double foodInfo = Double.parseDouble(keebs.nextLine());
+      
 
       //modify arg, add to mealarray
       theDB.add(new Food(newName,foodInfo));
