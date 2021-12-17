@@ -23,7 +23,7 @@ class Main{
       System.out.println(i.name +", "+ i.nickel);
     }
 
-    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a  day before feeling sick? (0 if not) \n");
+    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a day before feeling sick? (0 if not) \n");
     double userThresh = getPosDouble(temp);
 
     if(userThresh == 0){
@@ -196,7 +196,7 @@ class Main{
       if(mostNickel.title.equals("Snack") || snackCount > 3){//if largest meal was snack or lots of snacks
         return "Eat less nickel during snacks";
 
-      }else if(foodMode(foodList).nickel > threshhold/3){//if most common food large
+      }else if(foodMode(foodList).nickel > threshhold/10){//if most common food large
         return "Eat less " + foodMode(foodList).name;
 
       }else if(mostNickel.tallyNickel() > threshhold/2){//if largest meal big
@@ -204,7 +204,7 @@ class Main{
         return "Eat less nickel during " + mostNickel.title + ", particularly " + modeFood.name + ".";
 
       }else{//replace?
-        return "Eat less foods high in nickel";
+        return "There's nothing obvious that stands out, consider reducing overall dood intake";
       }
 
     }
