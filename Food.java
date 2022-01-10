@@ -31,7 +31,7 @@ class Food{
     if(nickel > high){
       return Color.RED;
     }else if(nickel < low){
-      return Color.RED;
+      return Color.GREEN;
     }
     //else, in middle
     return Color.YELLOW;

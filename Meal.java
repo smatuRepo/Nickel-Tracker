@@ -37,7 +37,7 @@ class Meal{
   public void addFood(ArrayList<Food> theDB)
   {
     System.out.print ("Food?: ");
-    String nameFood = keebs.nextLine();
+    String nameFood = keebs.nextLine(); //call bld()
 
 
     //READ file, compare to input
