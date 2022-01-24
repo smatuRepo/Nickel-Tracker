@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 
-class Meal{
+class MealMOD{
 
   //declare attributes
 
@@ -12,16 +12,16 @@ class Meal{
   int tempIndex; //for use b/n addfood, searchdb
   String title;
   String time;
-  ArrayList<Food> mealFoods = new ArrayList <Food>();
+  ArrayList<String> mealFoods = new ArrayList <String>();
   
 
   /*
-  constructor for Meal, initiallize name, time
+  constructor for Meal, initialize name, time
   @param title - name of meal
   @param time - formatted HH:MM, 24-hr clock
   void.
   */
-  public Meal(String title, String time)
+  public MealMOD(String title, String time)
   {
     this.title = title;
     this.time = time;
@@ -34,7 +34,7 @@ class Meal{
   @param theDB - arraylist foods, database
   void. changes obj attributes 
   */
-  public void addFood(Menu test, ArrayList<Food> theDB)
+  public void addFood(Menu test, ArrayList<String> theDB)
   {	
     //String serv;
 	  //System.out.print ("Food?: ");
@@ -66,19 +66,24 @@ class Meal{
     }else{//add to DB instead, if doesnt exist
       addToDB(nameFood, theDB, test);
     }
+
+
+    
   }
 
   /*
   Finds total Nickel in the arraylist of Foods
   @return the count value, double
-  */
+  
   public double tallyNickel()
   {
     double count = 0.0;
-    for (Food i: mealFoods)
-      count += i.nickel;
+    for (String i: mealFoods){
+      //count += i.nickel;
+    }
     return count;
   }
+  */
 
 
   /*
@@ -88,8 +93,9 @@ class Meal{
   @param theDB - the database, arraylist foods
   @return theDB, modified (if user says Yes) - 1 new food added
   */
-  private ArrayList<Food> addToDB(String newName, ArrayList<Food> theDB, Menu text)
+  private ArrayList<String> addToDB(String newName, ArrayList<String> theDB, Menu text)
   {
+    
     //System.out.println ("Input Doesn't Compute");
     //System.out.println ("Would you like to add it to the database (y/n)");
     //String yn = keebs.nextLine();
@@ -104,8 +110,7 @@ class Meal{
       do {//loop until get double 
         
         String servSz = text.textInput(help); //gets input, should be double (print debug line on internal frame)
-        help = Main.checkPosDouble(servSz); //returns debug line 
-        
+        //help = Main.checkPosDouble(servSz); //returns debug line "ok" = (+) double
         
         if(help.equals("ok")){
           //System.out.print ("What is the nickel amount?: ");
@@ -115,8 +120,8 @@ class Meal{
       }while(foodInfo < 0);
 
       //modify arg, add to mealarray
-      theDB.add(new Food(newName,foodInfo));
-      mealFoods.add(new Food(newName,foodInfo));
+      theDB.add(newName);
+      mealFoods.add(newName);
 
       //REWRITE all db contents to file
       try {
@@ -153,10 +158,10 @@ class Meal{
   @param theDB - arraylist foods, what the total is
   @return boolean - true if in file/DB
   */
-  private boolean searchDB(String input, ArrayList<Food> theDB){
+  private boolean searchDB(String input, ArrayList<String> theDB){
 
-    for(Food i:theDB){
-      if(input.equals(i.name)){
+    for(String i:theDB){
+      if(input.equals(i)){
         tempIndex = theDB.indexOf(i);
         return true; //food name is in DB
       }
@@ -189,6 +194,6 @@ class Meal{
       //System.out.print("Invalid input, retry: ");
       return "Not an integer, retry"; //retry
     }
-  }//end checkposint()
+  }
 
-}//EOF
+}

@@ -5,15 +5,18 @@ Nov. 15, 2021 - Jan. 26, 2021 part 2
 */
 
 import java.util.*;
-import javax.swing.*;
-import java.awt.*;
+//import javax.swing.*;
+//import java.awt.*;
 import java.io.*;
 
 class Main{
 
   public static void main(String[] args) {
     
-    Scanner temp = new Scanner(System.in);
+    //Scanner temp = new Scanner(System.in);
+    String decision;
+    double userThresh = -1;
+    boolean exit = false;
     //JFrame main = new JFrame("[app name]");
 
     //read current file contents
@@ -23,101 +26,187 @@ class Main{
       System.out.println(i.name +", "+ i.nickel);
     }
 
-    System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a day before feeling sick? (0 if not) \n");
-    double userThresh = getPosDouble(temp);
-
-    if(userThresh == 0){
-      userThresh = 150.0; //official
-    }
-     
-
-
-    //main menu
-    //init meals
-    Breakfast brek = new Breakfast();
-    Lunch lunc = new Lunch();
-    Dinner din = new Dinner();
-    ArrayList<Snack> snax = new ArrayList<Snack>();
-
-    String decide;
-    do{
-      System.out.println("What meal you eat?\nB: Breakfast\nL: Lunch\nD: Dinner\nS: Snack\nE: Finished");
-      decide = temp.nextLine();
-
-      switch(decide){
-        case("B"): //breakfast
-          brek.addFood(foodDB);
-          break;
-        case("L"): //lunch
-          lunc.addFood(foodDB);
-          break;
-        case("D"): //dinner
-          din.addFood(foodDB);
-          break;
-        case("S"): //new snack, add to arraylist
-          Snack snak = new Snack(validTime(temp));
-          snak.addFood(foodDB);
-          snax.add(snak);
-          break;
-        default:
-          System.out.println("Not a meal");
-      }
-    }while(!(decide.equals("E")));
-
-    //put meals together, add snacks too.
-    ArrayList<Meal> allMeals = new ArrayList<Meal>();
-    allMeals.add(brek);
-    allMeals.add(lunc);
-    allMeals.add(din);
-    //parse snax, add
-    for(Snack i: snax){
-      allMeals.add(i);
-    }
-
-    Meal[] tempMeal = allMeals.toArray(new Meal[0]); //let it be sorted
-
-    Arrays.sort(tempMeal, new Comparator<Meal>(){
-      @Override //sort based on time
-      public int compare(Meal m1, Meal m2){
-        return m1.time.compareTo(m2.time);
-      }
-    });
-
-    //set back to ArrayList
-    allMeals = new ArrayList<Meal>(Arrays.asList(tempMeal));
+    Menu screen = new Menu();
+    //screen.setVisible(true);
     
-    //output foods, tally nickel
-    double allNickel = 0.0;
+    
+    do{//big loop
 
-    for(Meal i: allMeals){
-      System.out.println(i.time + ": " + i.title); //debug
-        for(Food x: i.mealFoods){
-          System.out.print(x.name + " "); 
+      screen.intro();
+
+      decision = screen.buttonWait();
+      
+      if(decision.equals("")){
+        //screen.reset();
+
+
+        screen.threshGet();
+
+        decision = screen.buttonWait();
+
+        switch(decision){
+
+          
+          case("c"):
+            String userHelp = "Enter how much ug of nickel is your limit"; //user directions
+            do{
+              String tempDbl = screen.textInput(userHelp); //get string inp
+              String valid = checkPosDouble(tempDbl); //check if valid
+
+              if(valid.equals("ok")){
+                userThresh = Double.parseDouble(tempDbl);   
+              }else{
+                userHelp = valid; //to help user
+              }
+            }while(userThresh < 0);
+            break; //done
+
+          case("def"):
+            userThresh = 150.0;
+        }//end switch/case
+
+        //System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a day before feeling sick? (0 if not) \n");
+        //double userThresh = getPosDouble(temp);
+
+        //if(userThresh == 0){
+          //userThresh = 150.0; //official
+        //}
+        
+
+
+        //main menu
+        //init meals
+        Meal breakfast = new Meal("Breakfast", "07:30");
+        Meal lunch = new Meal("Lunch", "12:30");
+        Meal dinner = new Meal("Dinner", "18:00");
+        ArrayList<Meal> snax = new ArrayList<Meal>();
+
+        String decide;
+        screen.reset();
+        screen.mealSelect();
+        do{
+          //System.out.println("What meal you eat?\nB: Breakfast\nL: Lunch\nD: Dinner\nS: Snack\nE: Finished");
+          //decide = temp.nextLine();
+          
+
+          //replace with MealSelect()
+          decide = screen.buttonWait();
+
+          switch(decide){
+            case("b"): //breakfast
+              breakfast.addFood(screen, foodDB);
+              break;
+            case("l"): //lunch
+              lunch.addFood(screen, foodDB);
+              break;
+            case("d"): //dinner
+              dinner.addFood(screen, foodDB);
+              break;
+            case("s"): //new snack, add to arraylist
+              
+              //needs to be modded, same thing with checkposdouble()
+              String time = "no";
+              String userHelp = "Enter a time in of HH:MM, 24-hour time";
+              
+              do{
+                time = screen.textInput(userHelp);
+                userHelp = validTime(time);
+                if(userHelp.equals("ok")){
+                  
+                }else{
+                  time = "no";
+                }
+
+              }while(time.equals("no"));
+
+              
+              Meal snak = new Meal("Snack", time);
+              snak.addFood(screen, foodDB);
+              snax.add(snak);
+              break;
+
+            default:
+              System.out.println("Not a meal");
+          }//end switch/case
+
+        }while(!(decide.equals("x")));
+        screen.reset(); //now to outro()
+
+        //put meals together, add snacks too.
+        ArrayList<Meal> allMeals = new ArrayList<Meal>();
+        allMeals.add(breakfast);
+        allMeals.add(lunch);
+        allMeals.add(dinner);
+        //parse snax, add
+        for(Meal i: snax){
+          allMeals.add(i);
         }
-      System.out.print("\n");
-      allNickel += i.tallyNickel(); //the tally
-    }
 
-    System.out.println("You ate " + allNickel + " micrograms of nickel.");
+        Meal[] tempMeal = allMeals.toArray(new Meal[0]); //let it be sorted
 
-    System.out.println(advice(allMeals, userThresh, allNickel));
+        Arrays.sort(tempMeal, new Comparator<Meal>(){
+          @Override //sort based on time
+          public int compare(Meal m1, Meal m2){
+            return m1.time.compareTo(m2.time);
+          }
+        });
+
+        //set back to ArrayList
+        allMeals = new ArrayList<Meal>(Arrays.asList(tempMeal));
+        
+        //output foods, tally nickel
+        double allNickel = 0.0;
+
+        for(Meal i: allMeals){
+          //System.out.println(i.time + ": " + i.title); //debug
+            //for(Food x: i.mealFoods){
+              //System.out.print(x.name + " "); 
+            //}
+          //System.out.print("\n");
+          allNickel += i.tallyNickel(); //the tally
+        }
+
+        //System.out.println("You ate " + allNickel + " micrograms of nickel.");
+
+        //System.out.println(advice(allMeals, userThresh, allNickel));
+        
+        screen.outro(allMeals.size(),allMeals, allNickel, advice(allMeals, userThresh, allNickel));
+
+        
+        String getOut = "";
+
+        do{//safeguard to make sure buttonwait isnt stupid
+          getOut = screen.buttonWait(); //get button input
+
+          if(getOut.equals("q")){//save&exit
+            exit = true;//exit loop
+          }else if(getOut.equals("b")){ //save&continue
+            exit = false;//stay in loop
+          }//no else
+        }while(getOut.equals("b") || getOut.equals("q")); //if valid button input returned
+        }else{
+        //READ FILE LOG, NEED NEW PANEL IN CLASS MENU
+        //DO OUTRO(), BUT ONLY 1 MEAL
+        //
+        }
+
+        String getOut = "";
+        //both final screens use outro(),
+        //same buttons, so fine
+
+        do{//safeguard to make sure buttonwait isnt stupid
+          getOut = screen.buttonWait(); //get button input
+
+          if(getOut.equals("q")){//save&exit
+            exit = true;//exit loop
+          }else if(getOut.equals("b")){ //save&continue
+            exit = false;//stay in loop
+          }//no else
+        }while(getOut.equals("b") || getOut.equals("q")); //if valid button input returned
+      }while(!(exit));//loop back to intro(), reset vars
     
-    /*removed for NOW, gui too hard
-    //create main jframe, make starting frame
-    //JFrame main = new JFrame("Intro");
-    //jframe attriutes
-    main.setSize(500,300);
-    main.setVisible(true);
-    main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    main.setLayout(new FlowLayout());
-
-    Intro introScreen = new Intro(main);
     
-    System.out.println(userThresh);
-    */
-
-    temp.close();
-  }
+  }//end main()
 
 
   //HELPER METHODS
@@ -243,69 +332,67 @@ class Main{
 
   /*
   Asks for (+) decimal input, gets input
-  @param keyboard - Scanner, will not be closed
-  @return input - double input within a certain range of values
+  @param input - string, to chekc if double
+  @return string - "ok"/not num/not pos (debug lines)
   */
-  private static double getPosDouble(Scanner keyboard){
-
-    System.out.print("Enter a positive decimal value: ");
-    double input;
-    do{
-      try{
-        input = Double.parseDouble(keyboard.nextLine());        
-        if(input >= 0){ //if positive, end
-          return input;
-        }else{
-          System.out.print("Value must be positive, retry: ");
-        }
-      }catch(NumberFormatException ex){
-        System.out.print("Invalid input, retry: ");
-        continue; //retry
-      }
-    }while(true); //does not exit until valid input reached
-  }
+  public static String checkPosDouble(String input){
+    try{
+	  //input = Integer.parseInt(keyboard.nextLine());        
+	  if(Double.parseDouble(input) >= 0){ //if positive, end
+	    return "ok";
+	  }else{
+	    //System.out.print("Value must be positive, retry: ");
+	    return "Must be more than 0";
+	    }
+    }catch(NumberFormatException ex){
+      //System.out.print("Invalid input, retry: ");
+      return "Not an number, retry"; //retry
+    }
+  }//end checkposdouble()
+    
 
 
   /*
   bulletproofing of time string for Snack constructor
-  SHOULD USE GUI LATER - maybe pop-up window?
-  @param keeb - scanner, is not modified
-  @return valid time string - HH:MM, user input, 24-hr time
+  //SHOULD USE GUI LATER - maybe pop-up window?
+  @param time - String, to check if in valid format
+  @return debug string -"ok" means valid - HH:MM, 24-hr time
   */
-  private static String validTime(Scanner keeb){
+  private static String validTime(String time){
     
-    while(true){
+    //while(true){
       try{
-        System.out.println("Input time, 00:00-23:59:"); //input time
-        String time = keeb.nextLine();
+        //System.out.println("Input time, 00:00-23:59:"); //input time
+        //String time = keeb.nextLine();
         
         if(time.length() != 5){//prevent index OOB except
-          System.out.println("input is too long or short");
-          continue;//retry
+          return "input is too long or short";
+          //continue;//retry
         }else if(time.charAt(2)!= ':'){
-          System.out.println("3rd character must be a \':\'");
-          continue;
+          return "3rd character must be a ':'";
+          //continue;
         }else if(Integer.parseInt(time.substring(0,2)) < 0 || Integer.parseInt(time.substring(0,2)) > 23){
-          System.out.println("invalid hours");
-          continue;
+          return "invalid hours";
+          //continue;
         }else if(Integer.parseInt(time.substring(3,5)) < 0 || Integer.parseInt(time.substring(3,5)) > 59){
-          System.out.println("invalid minutes");
-          continue;
+          return "invalid minutes";
+          //continue;
         }else if(time.charAt(0) == '-' || time.charAt(3) == '-'){
-          System.out.println("Cannot be -0");
-          continue;
+          return "Cannot be -0";
+          //continue;
         }
 
 
-        return time; //basically else
+        return "ok"; //basically else, is valid
 
       }catch(NumberFormatException numberFormatException){
-        System.out.println("HH:MM, HH is integer between 00-23, MM between 00-59");
-        continue;
+        return "HH:MM, HH is integer between 00-23, MM between 00-59";
+        //continue;
       //}catch(IndexOutOfBoundsException oob){
       //  System.out.println("oob");
       }
-    }
+    //}
 
   }
+
 }
