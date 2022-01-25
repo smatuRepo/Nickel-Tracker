@@ -7,7 +7,7 @@ import java.util.*;
 class Menu extends JFrame implements ActionListener{
 
   /**
-	 * 
+	 * The GUI file
 	 */
 	private static final long serialVersionUID = 1L;
   private boolean done;
@@ -303,9 +303,10 @@ class Menu extends JFrame implements ActionListener{
   void.
   */
   public void actionPerformed(ActionEvent e){
-    done = true;
+    
     button = "";
     button = e.getActionCommand();//lets buttonWait choose button
     System.out.println(button);
+    done = true;
   }//end actionPerformed()
 }//end Menu

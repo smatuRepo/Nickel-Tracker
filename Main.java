@@ -5,6 +5,8 @@ Nov. 15, 2021 - Jan. 26, 2021 part 2
 */
 
 import java.util.*;
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter; 
 //import javax.swing.*;
 //import java.awt.*;
 import java.io.*;
@@ -17,7 +19,7 @@ class Main{
     String decision;
     double userThresh = -1;
     boolean exit = false;
-    //JFrame main = new JFrame("[app name]");
+    ArrayList<Food> dayFood = new ArrayList<Food>(); //for saving and loading logs
 
     //read current file contents
     //create place to store Food objects
@@ -27,30 +29,27 @@ class Main{
     }
 
     Menu screen = new Menu();
-    //screen.setVisible(true);
     
     
-    do{//big loop
+    do{ //big loop
 
       screen.intro();
 
       decision = screen.buttonWait();
-      
-      if(decision.equals("")){
-        //screen.reset();
+      screen.reset();
 
+      if(decision.equals("w")){//make new log
 
-        screen.threshGet();
+        screen.threshGet(); 
 
         decision = screen.buttonWait();
-
-        switch(decision){
-
-          
+        switch(decision){//either skip input or give nickel threshold
+    
           case("c"):
-            String userHelp = "Enter how much ug of nickel is your limit"; //user directions
+            
+            String userHelp = "Enter how much of nickel is your limit (mcg)"; //user directions
             do{
-              String tempDbl = screen.textInput(userHelp); //get string inp
+              String tempDbl = screen.textInput(userHelp); //get string input
               String valid = checkPosDouble(tempDbl); //check if valid
 
               if(valid.equals("ok")){
@@ -63,16 +62,10 @@ class Main{
 
           case("def"):
             userThresh = 150.0;
+          default:
+            System.out.println("skip " + decision);
         }//end switch/case
-
-        //System.out.print("Welcome to Nickel Tracker\nDo you know how much nickel (in micrograms) you can have in a day before feeling sick? (0 if not) \n");
-        //double userThresh = getPosDouble(temp);
-
-        //if(userThresh == 0){
-          //userThresh = 150.0; //official
-        //}
         
-
 
         //main menu
         //init meals
@@ -85,11 +78,7 @@ class Main{
         screen.reset();
         screen.mealSelect();
         do{
-          //System.out.println("What meal you eat?\nB: Breakfast\nL: Lunch\nD: Dinner\nS: Snack\nE: Finished");
-          //decide = temp.nextLine();
-          
-
-          //replace with MealSelect()
+           
           decide = screen.buttonWait();
 
           switch(decide){
@@ -103,21 +92,15 @@ class Main{
               dinner.addFood(screen, foodDB);
               break;
             case("s"): //new snack, add to arraylist
-              
-              //needs to be modded, same thing with checkposdouble()
-              String time = "no";
+
+              String time;
               String userHelp = "Enter a time in of HH:MM, 24-hour time";
               
               do{
                 time = screen.textInput(userHelp);
                 userHelp = validTime(time);
-                if(userHelp.equals("ok")){
-                  
-                }else{
-                  time = "no";
-                }
 
-              }while(time.equals("no"));
+              }while(!(userHelp.equals("ok")));
 
               
               Meal snak = new Meal("Snack", time);
@@ -154,62 +137,198 @@ class Main{
         //set back to ArrayList
         allMeals = new ArrayList<Meal>(Arrays.asList(tempMeal));
         
-        //output foods, tally nickel
+        //tally nickel, tally foods
+        //for writing file 
         double allNickel = 0.0;
+        
+
+        //for writing file 
 
         for(Meal i: allMeals){
-          //System.out.println(i.time + ": " + i.title); //debug
-            //for(Food x: i.mealFoods){
-              //System.out.print(x.name + " "); 
-            //}
-          //System.out.print("\n");
+          for(Food x: i.mealFoods){
+            dayFood.add(x); //the food
+          }
           allNickel += i.tallyNickel(); //the tally
         }
 
-        //System.out.println("You ate " + allNickel + " micrograms of nickel.");
+        String userAdv = advice(allMeals, userThresh, allNickel); 
 
-        //System.out.println(advice(allMeals, userThresh, allNickel));
-        
-        screen.outro(allMeals.size(),allMeals, allNickel, advice(allMeals, userThresh, allNickel));
+        screen.outro(allMeals.size(),allMeals, allNickel, userAdv);
 
         
-        String getOut = "";
+        
+        //WRITE NEW FILE
+        newLog(userAdv, userThresh, allNickel, dayFood);
+        
 
-        do{//safeguard to make sure buttonwait isnt stupid
-          getOut = screen.buttonWait(); //get button input
-
-          if(getOut.equals("q")){//save&exit
-            exit = true;//exit loop
-          }else if(getOut.equals("b")){ //save&continue
-            exit = false;//stay in loop
-          }//no else
-        }while(getOut.equals("b") || getOut.equals("q")); //if valid button input returned
         }else{
-        //READ FILE LOG, NEED NEW PANEL IN CLASS MENU
+        //READ FILE LOG, NEED NEW PANEL IN CLASS MENU - for decision
+
+        int logNum = Integer.parseInt(readFirstLine("numDays.txt"));
+
+        //so Menu should create x amnt of buttons given logNum, assign, 
+        //read dates, give buttons proper titles
+
+
+        decision = screen.buttonWait();
+
+        String theFile = "day" + decision + ".txt";
+
+        //then read file contents
+        //remember: read date-advice-totnik-allfoods
+
+        //own method?
+
+        //read date, discard?
+        //read advice, save
+        //read totnik, save
+
+        //read foods:
+        //while string!=null, x=4, x++
+        //read food name
+        //read food nickel.parseDouble()
+        //init Food object
+        //dayFood.add([food]);
+
+        //how to convert arraylist food to arraylist meal?
+        //
+
+        //call screen.outro(1,new ArrayList<Meal>(theonlymeal), totalNickel, advice)
+
+
+
+
+
+        screen.reset();
+
+        //screen.outro(???);
+
         //DO OUTRO(), BUT ONLY 1 MEAL
         //
         }
 
-        String getOut = "";
+
+
         //both final screens use outro(),
         //same buttons, so fine
 
-        do{//safeguard to make sure buttonwait isnt stupid
-          getOut = screen.buttonWait(); //get button input
+        String getOut = screen.buttonWait(); //get button input
 
-          if(getOut.equals("q")){//save&exit
-            exit = true;//exit loop
-          }else if(getOut.equals("b")){ //save&continue
-            exit = false;//stay in loop
-          }//no else
-        }while(getOut.equals("b") || getOut.equals("q")); //if valid button input returned
-      }while(!(exit));//loop back to intro(), reset vars
+        if(getOut.charAt(0) == 'q'){//save&exit
+          exit = true;
+        }else if(getOut.charAt(0) == 'b'){ //save&continue
+          exit = false;
+        }//no else
+
+        
+        screen.reset();
+        
+      }while(!(exit));//loop back to intro(), reset vars - only exit when button pressed
     
+    screen.dispose();
+    System.out.println("-EOF-");
     
   }//end main()
 
 
+
+
   //HELPER METHODS
+
+  /*
+  reads first line of text file, returns it
+  @param theFileName - string, should be .txt
+  @return String - first line of file
+  */
+  private static String readFirstLine(String theFileName){
+    String stLine = "";
+    try {
+      //connect to file, buffer
+      FileReader reader = new FileReader(theFileName);
+      BufferedReader rBuffer = new BufferedReader(reader);
+
+      //for i in x-1; readline, discard
+      //to read Nth line
+
+      //do{
+        //System.out.println(newLine); debug
+        stLine = rBuffer.readLine(); //read only the 1st line
+      //}while (fileNum != null);
+      System.out.println("1st line: " + stLine); //debug
+
+      reader.close();
+      rBuffer.close();
+
+    }catch(Exception ex){
+      System.out.println(ex.getMessage());
+    }
+    return stLine;
+  }
+
+
+  /*
+  write new food log file
+  updates numDays.txt
+  @param userAdvice - string given from advice()
+  @param thresh - double, user nickel thresh
+  @param totNik - double, total nickel consumed
+  @param eachFood - list of foods eaten in the day
+  void
+  */
+  private static void newLog(String userAdvice, double thresh, double totNik, ArrayList<Food> eachFood){
+    //READ INT TO MAKE FILE NAME
+    int fileNum = Integer.parseInt(readFirstLine("numDays.txt"));
+    
+    try {
+      
+      //format: date-advice-totnik-userthresh-allfoods
+
+      //WRITE
+      //File name
+      String logName = "day" + fileNum + ".txt";
+      //connect to file, buffer
+      FileWriter writer = new FileWriter(logName);
+      BufferedWriter buffer = new BufferedWriter(writer);
+
+      //find date
+      String today = java.time.LocalDate.now() + "";
+
+      //write date
+      buffer.write(today);
+      buffer.newLine();
+
+      //write advice (userAdv)
+      buffer.write(userAdvice);
+      buffer.newLine();
+
+      //write total nickel
+      buffer.write(totNik+"");
+      buffer.newLine();
+
+      //write foods|nickel.. until none left
+      for(Food i:eachFood){
+        buffer.write(i.name);
+        buffer.newLine();
+        buffer.write(i.nickel + "");
+        buffer.newLine();
+      }
+      
+      
+      //rewrite to numDays, save num of files
+
+      writer.close(); //reset
+      writer = new FileWriter("numDays.txt");
+      //buffer = new BufferedWriter(writer);
+
+      buffer.write(++fileNum + "");
+
+      buffer.close(); //close
+      writer.close();
+
+    }catch(Exception ex){
+      System.out.println(ex.getMessage());
+    }//end write
+  }
 
 
   /*
@@ -251,7 +370,7 @@ class Main{
   @param allFood - complete arraylist of meals for analysis
   @param threshhold - double, if over thresh, check what user could do
   @param fullTally - double, allFood.tallyNickel
-  @return help - string of advice for next day
+  @return help - string of advice from given data
   */
   private static String advice(ArrayList<Meal> allFood, double threshhold, double fullTally){
     

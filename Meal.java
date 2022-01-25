@@ -66,7 +66,9 @@ class Meal{
     }else{//add to DB instead, if doesnt exist
       addToDB(nameFood, theDB, test);
     }
+    
   }
+  
 
   /*
   Finds total Nickel in the arraylist of Foods
@@ -109,7 +111,7 @@ class Meal{
         
         if(help.equals("ok")){
           //System.out.print ("What is the nickel amount?: ");
-          foodInfo = Double.parseDouble(keebs.nextLine());
+          foodInfo = Double.parseDouble(servSz);
         }
       
       }while(foodInfo < 0);
