@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-
 class Menu extends JFrame implements ActionListener{
 
   /**
@@ -14,34 +13,30 @@ class Menu extends JFrame implements ActionListener{
   private String button;
 
   /*
-  setting up the JFrame, constructor
-  no params
-  void
+   * Setting up the JFrame, constructor
+   * no params
+   * void. sets attributes 
   */
   public Menu(){//still invis
-    super("Nickel Tracker: Tracker of Nickel");
+    super("Nickel Tracker: Tracker of Nickel"); //title
     setBounds(0,0,450,300);
     setLayout(new GridLayout(3,0,3,3)); //3 rows
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
   }//end constructor
 
 
   /*
-  waits for a button input, specify which one pressed
-  no params
-  @return string, what button pressed
-  */
+   * waits for a button input, specify which one pressed
+   * no params, waits for local variables to change
+   * @return string, what button pressed
+   */
   public String buttonWait(){
-    //this.requestFocus();
     
     done = false; //reset
-    //button = "";
     
     while(!(done)){
       System.out.print("");
     }
-    
     //System.out.println(button); //debug
     
     return button;
@@ -50,9 +45,9 @@ class Menu extends JFrame implements ActionListener{
 
   /*
    * introduction panel - adds jlabel + 2 buttons - read or write a file (log)
-   * does NOT need external buttonWait()
-   * no param
-   * @return character - r or w (read or write)
+   * needs buttonWait()
+   * no params
+   * void
    */
   public void intro(){
         
@@ -72,10 +67,8 @@ class Menu extends JFrame implements ActionListener{
     add(help);
     add(row2);
     
-    //boolean i = create.requestFocusInWindow();
     repaint();
     setVisible(true);
-    //return buttonWait().charAt(0); //string -> char, just easier to deal with
     
   }//end intro()
 
@@ -90,7 +83,7 @@ class Menu extends JFrame implements ActionListener{
     //init buttons, assign string to them (give fnx)
     setVisible(false);
     JButton c = new JButton("Custom");
-    JButton def = new JButton("Default");
+    JButton def = new JButton("Default (150)");
     
     c.setActionCommand("c");
     def.setActionCommand("def");
@@ -117,14 +110,16 @@ class Menu extends JFrame implements ActionListener{
 
 
   
-/*
-  main menu, lets user select which meal they want to add to 
-  NEEDs buttonWait
-  1 label, 5 buttons, 1 internal frame(textfield+label)
-  no params, void
-  */
+  /*
+   * main menu, lets user select which meal they want to add to 
+   * needs buttonWait()
+   * 1 label, 5 buttons, 1 internal frame(textfield+label)
+   * no params, void
+   */
   public void mealSelect(){
+    
     setVisible(false);
+
     //init buttons, assign string to them (give fnx)
     JButton b = new JButton("Breakfast");
     JButton l = new JButton("Lunch");
@@ -150,8 +145,7 @@ class Menu extends JFrame implements ActionListener{
     r2.add(s);
     r2.add(e);
 
-    JLabel r1 = new JLabel("[here is thing, enter what meal you ate blah]"); //how align
-    //r2.setHorizontalAlignment(SwingConstants.CENTER);
+    JLabel r1 = new JLabel("What meal did you eat? "); //how align
 
     //add to frame
     add(r1);
@@ -165,31 +159,28 @@ class Menu extends JFrame implements ActionListener{
 
   
   /*
-  makes outro screen, many rows of foods, ouputs total nickel, user confirmation
-  does not need buttonwait
-  @param numMeals - should be length of meals ArrayList
-  @param meals - arraylist of meals
-  @param totNik - total nickel in all meals
-  @param advice - string, should call advice()
-  void.
-  */
+   * makes outro screen, many rows of foods, ouputs total nickel, user confirmation
+   * needs buttonWait()
+   * @param numMeals - should be length of meals ArrayList
+   * @param meals - arraylist of meals
+   * @param totNik - total nickel in all meals
+   * @param advice - string, should call advice()
+   * void.
+   */
   public void outro(int numMeals, ArrayList<Meal> meals, double totNik, String advice){
-    //setText("SUMMARY");\
+
     setVisible(false);
-    setSize(450,150+(numMeals * 40)); //will always be at least 3 meals
+    setSize(450,150+(numMeals * 50)); //at least 3 meals
     setLayout(new GridLayout(numMeals + 2,0,5,5));
 
-    //set up 1st row
-    //JPanel o1 = new JPanel(new GridLayout(0,numMeals,1,5));
-
-    //adding foods to each row
+    //adding foods to each row(per meal)
     for(Meal i: meals){
 
       JPanel newMeal = new JPanel();//new row
       
       newMeal.add(new JLabel(i.time + " - " + i.title));
       
-      for(Food x: i.mealFoods){
+      for(Food x: i.mealFoods){//add each food to row
         JPanel newFood = new JPanel();
         newFood.setBackground(x.getColour());
         
@@ -198,15 +189,14 @@ class Menu extends JFrame implements ActionListener{
       }//end nested for
       add(newMeal); //adds new row
     }//end for
-
     
     //2nd/3rd row, jlabels, button
     JPanel o2 = new JPanel();
     o2.add(new JLabel("In total, you ate " + totNik + " ug of nickel."));
     o2.add(new JLabel(advice));
+    JPanel o3 = new JPanel();
 
     //add fnx
-    JPanel o3 = new JPanel();
     JButton quit = new JButton("Save & Quit"); //img?
     JButton back = new JButton("Save & Continue"); 
     quit.setActionCommand("q");
@@ -218,36 +208,70 @@ class Menu extends JFrame implements ActionListener{
     o3.add(quit);
     
     //add to frame
-    //add(o1);
     add(o2);
     add(o3);
     setVisible(true);
     
-    //does not need buttonwait
-    //done = false; //reset var
-    //while(!(done)){
-    //  System.out.print("");
-    //}//end wait
-
-    //o1.dispose();
-    //o2.dispose();
-    //o3.dispose();
-    
-    //remove(o1);
-    //remove(o2);
-    //remove(o3);
-    
-    
   }//end outro()
   
   
+  /*
+   * new frame creates X amount of buttons given logNum, assigns functions
+   * @param count - int, how many files
+   * reads dates from files, gives buttons proper titles
+   * needs buttonWait()
+   * void
+   */
+  public void fileSelect(int count) {
+
+    setVisible(false);
+    setSize(450,100+((count+2)/3 * 80)); 
+    setLayout(new GridLayout(2+(count)/3,1,10,15)); //rounding up
+    
+    JPanel temp;
+    JButton tempBT;
+    
+    JLabel help = new JLabel("Select which file you would like to see");
+    add(help);
+    
+    //each row has 3 buttons max
+    for(int row = 0; row < (count+2)/3; row++) {
+      
+      temp = new JPanel();//new row
+      
+      for(int col = 1; col < 4; col++) {
+        
+        //System.out.println(row*3+col < 1+count);
+        //if valid file name, add button
+        if(row*3+col < 1 + count) {
+          tempBT = new JButton(""+ (row*3+col) + ": " + Main.readNthLine("day"+(row*3 + col)+".txt",1)); //number: date
+          tempBT.setActionCommand(""+(row*3+col));
+          tempBT.addActionListener(this);
+          temp.add(tempBT);
+          
+          //System.out.println("count " + ((row*3)+col) + " / " + count);
+          
+        }else {
+          //System.out.println("break");
+          break;
+        }
+      }
+      
+      add(temp);
+      //System.out.println("row added: " + row);
+    }//end big for loop
+    
+    setVisible(true);
+    
+  }//end fileSelect()
+  
   
   /*
-   * makes & adds JInternalFrame, has textfield and confirm button
+   * makes & adds JInternalFrame, has jtextfield and confirm button
    * does NOT need buttonWait
    * @param name - what meal, will be title of mini frame
-   * @return string - what's in textfield
-  */
+   * @return string - what's in jtextfield
+   */
   public String textInput(String name){
     //this.setVisible(false);
     
@@ -270,7 +294,6 @@ class Menu extends JFrame implements ActionListener{
 
     j1.setVisible(true);
     jt1.grabFocus();
-    //jt1.requestFocusInWindow();
     
     //does not need buttonwait, will only exit when enter pressed
     while(true) {
@@ -282,7 +305,6 @@ class Menu extends JFrame implements ActionListener{
       }//end if 
     }//end while
   }//end textInput()
-  
 
   
   /*
@@ -292,21 +314,22 @@ class Menu extends JFrame implements ActionListener{
    */
   public void reset() {
     getContentPane().removeAll();
+    setBounds(0,0,450,300);
+    setLayout(new GridLayout(3,0,3,3)); //3 rows
     repaint();
   }//end reset
   
   
-  
   /*
-  chenges local vars, lets stuff wait for input
-  @param e - actionevent, assiciated with a button
-  void.
+   * chenges local vars, lets stuff wait for input
+   * @param e - actionevent, assiciated with a button
+   * void.
   */
   public void actionPerformed(ActionEvent e){
-    
-    button = "";
+    button = ""; //reset spaghetti
     button = e.getActionCommand();//lets buttonWait choose button
-    System.out.println(button);
+    //System.out.println(button);
     done = true;
   }//end actionPerformed()
+
 }//end Menu

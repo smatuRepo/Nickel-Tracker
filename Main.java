@@ -1,52 +1,55 @@
 /*
-Jonathan, Simon
-Nickel Tracker: Tracker of Nickel
-Nov. 15, 2021 - Jan. 26, 2021 part 2
+ * Ver. 2.0.1
+ * Jonathan, Simon
+ * Nickel Tracker: Tracker of Nickel
+ * Nov. 15, 2021 - Jan. 26, 2022 part II
 */
 
 import java.util.*;
-import java.time.LocalDateTime;  
-import java.time.format.DateTimeFormatter; 
-//import javax.swing.*;
-//import java.awt.*;
 import java.io.*;
 
 class Main{
 
   public static void main(String[] args) {
     
-    //Scanner temp = new Scanner(System.in);
-    String decision;
-    double userThresh = -1;
+    String decision; //init vars that do not reset
     boolean exit = false;
-    ArrayList<Food> dayFood = new ArrayList<Food>(); //for saving and loading logs
+    int logNum = Integer.parseInt(readNthLine("numDays.txt",1)); //is updated throughout loop
+    
+    
 
     //read current file contents
-    //create place to store Food objects
-    ArrayList<Food> foodDB = readDB(new ArrayList<Food>());
-    for(Food i: foodDB){
-      System.out.println(i.name +", "+ i.nickel);
-    }
+    //create place to store all possible Food objects
+    ArrayList<Food> foodDB = readDB();
+    //for(Food i: foodDB){
+      //System.out.println(i.name +", "+ i.nickel);
+    //}
 
-    Menu screen = new Menu();
-    
+    Menu screen = new Menu(); //the only jframe
     
     do{ //big loop
 
+      //variables to reset
+      //for saving and loading logs
+      ArrayList<Food> dayFood = new ArrayList<Food>(); 
+      double userThresh = -1;
+      
       screen.intro();
-
+      
+      //get button input
       decision = screen.buttonWait();
       screen.reset();
 
-      if(decision.equals("w")){//make new log
+      if(decision.equals("w")){//make NEW log
 
         screen.threshGet(); 
-
+        //ask for userThresh,wait
         decision = screen.buttonWait();
+
         switch(decision){//either skip input or give nickel threshold
     
-          case("c"):
-            
+          case("c"): //user input thresh
+            userThresh = -1;
             String userHelp = "Enter how much of nickel is your limit (mcg)"; //user directions
             do{
               String tempDbl = screen.textInput(userHelp); //get string input
@@ -60,28 +63,32 @@ class Main{
             }while(userThresh < 0);
             break; //done
 
-          case("def"):
+          case("def"): //skip thresh
             userThresh = 150.0;
           default:
+            userThresh = 150.0;
             System.out.println("skip " + decision);
         }//end switch/case
         
 
-        //main menu
+        //MAIN MENU
         //init meals
         Meal breakfast = new Meal("Breakfast", "07:30");
         Meal lunch = new Meal("Lunch", "12:30");
         Meal dinner = new Meal("Dinner", "18:00");
+        //variable amount of snacks
         ArrayList<Meal> snax = new ArrayList<Meal>();
 
-        String decide;
+
+        //String decide;
         screen.reset();
-        screen.mealSelect();
+        screen.mealSelect(); //main menu
+
         do{
            
-          decide = screen.buttonWait();
+          decision = screen.buttonWait();
 
-          switch(decide){
+          switch(decision){
             case("b"): //breakfast
               breakfast.addFood(screen, foodDB);
               break;
@@ -109,10 +116,11 @@ class Main{
               break;
 
             default:
-              System.out.println("Not a meal");
+              //System.out.println("Not a meal");
           }//end switch/case
 
-        }while(!(decide.equals("x")));
+        }while(!(decision.equals("x")));
+
         screen.reset(); //now to outro()
 
         //put meals together, add snacks too.
@@ -128,7 +136,7 @@ class Main{
         Meal[] tempMeal = allMeals.toArray(new Meal[0]); //let it be sorted
 
         Arrays.sort(tempMeal, new Comparator<Meal>(){
-          @Override //sort based on time
+          @Override //sort based on TIME
           public int compare(Meal m1, Meal m2){
             return m1.time.compareTo(m2.time);
           }
@@ -140,72 +148,84 @@ class Main{
         //tally nickel, tally foods
         //for writing file 
         double allNickel = 0.0;
-        
-
-        //for writing file 
 
         for(Meal i: allMeals){
           for(Food x: i.mealFoods){
-            dayFood.add(x); //the food
+            dayFood.add(x); //add the food
           }
-          allNickel += i.tallyNickel(); //the tally
+          allNickel += i.tallyNickel(); //add to tally
         }
 
+        //what should user do based on given info
         String userAdv = advice(allMeals, userThresh, allNickel); 
+
 
         screen.outro(allMeals.size(),allMeals, allNickel, userAdv);
 
         
         
         //WRITE NEW FILE
-        newLog(userAdv, userThresh, allNickel, dayFood);
-        
+        newLog(userAdv, userThresh, allNickel, dayFood, logNum++);
 
+        
+        
         }else{
         //READ FILE LOG, NEED NEW PANEL IN CLASS MENU - for decision
 
-        int logNum = Integer.parseInt(readFirstLine("numDays.txt"));
+        //make new frame to output all available files
+        screen.fileSelect(logNum);
 
-        //so Menu should create x amnt of buttons given logNum, assign, 
-        //read dates, give buttons proper titles
-
-
-        decision = screen.buttonWait();
-
+        //try {
+          decision = "0";
+          while(Integer.parseInt(decision) < 1){
+            //wait, get input 
+            decision = screen.buttonWait();
+            //break;
+          }
+        //}catch(NumberFormatException ex) {
+          //continue; //make sure they don't press wrong button
+        //}
+        
+        //what file to read
         String theFile = "day" + decision + ".txt";
+        
+        //System.out.println(theFile+" out of " + logNum + " files"); //debug
 
-        //then read file contents
-        //remember: read date-advice-totnik-allfoods
+        //then read file contents, remember file format
+        //date-advice-totnik-allfoods
 
-        //own method?
-
-        //read date, discard?
         //read advice, save
+        String advice = readNthLine(theFile,2);
         //read totnik, save
-
-        //read foods:
-        //while string!=null, x=4, x++
-        //read food name
-        //read food nickel.parseDouble()
-        //init Food object
-        //dayFood.add([food]);
-
-        //how to convert arraylist food to arraylist meal?
-        //
-
-        //call screen.outro(1,new ArrayList<Meal>(theonlymeal), totalNickel, advice)
-
-
-
-
-
-        screen.reset();
-
-        //screen.outro(???);
-
-        //DO OUTRO(), BUT ONLY 1 MEAL
-        //
+        double pastNik = Double.parseDouble(readNthLine(theFile,3));
+        
+        //read foods, start at line 4
+        int line = 4;
+        String foodName = "";//readNthLine(theFile, line++);
+        double foodNickel = 0; //Double.parseDouble(readNthLine(theFile,line++));
+        
+        while(true){
+          try {
+            foodName = readNthLine(theFile, line++);
+            foodNickel = Double.parseDouble(readNthLine(theFile,line++));
+            dayFood.add(new Food(foodName,foodNickel));
+          }catch(NullPointerException NPE){
+            //System.out.println(line);
+            break;
+          }
         }
+        
+
+        //convert arrayList food to arrayList meal (size 1)
+        //
+        Meal theOnlyMeal = new Meal("All The Foods", "Today");
+        theOnlyMeal.mealFoods = dayFood;
+        ArrayList<Meal> oneMeal = new ArrayList<Meal>(1);
+        oneMeal.add(theOnlyMeal);
+        
+        screen.reset();
+        screen.outro(1,oneMeal, pastNik, advice);
+        } //end large if
 
 
 
@@ -216,17 +236,55 @@ class Main{
 
         if(getOut.charAt(0) == 'q'){//save&exit
           exit = true;
-        }else if(getOut.charAt(0) == 'b'){ //save&continue
-          exit = false;
-        }//no else
+        //}else if(getOut.charAt(0) == 'b'){ //save&continue
+          //exit = false;
+        }//no else, exit changed nowhere else
 
         
         screen.reset();
         
       }while(!(exit));//loop back to intro(), reset vars - only exit when button pressed
+    //OUT OF MAIN LOOP, CLOSING
+    
     
     screen.dispose();
-    System.out.println("-EOF-");
+    //System.out.println("-EOF-");
+    
+    
+    //UPDATE FILES
+    try {
+      //NUMDAYS.TXT
+      FileWriter writer1 = new FileWriter("numDays.txt",false);
+      BufferedWriter buffer1 = new BufferedWriter(writer1);
+      
+      buffer1.write("" + logNum);
+      buffer1.newLine();
+      
+      buffer1.close(); //close
+      writer1.close();
+      
+      //DATABASE.TXT
+      FileWriter writer = new FileWriter("database.txt",false);
+      BufferedWriter buffer = new BufferedWriter(writer);
+
+      //write foods|nickel.. until none left
+      for(Food i:foodDB){
+        buffer.write(i.name);
+        buffer.newLine();
+        buffer.write(i.nickel + "");
+        buffer.newLine();
+      }
+      
+      buffer.close();
+      writer.close(); 
+      
+    }catch(Exception ex){
+      //System.out.println(ex.getMessage()+", ok?");
+    }
+    //System.out.println("----updated?----");
+    //for(Food i: foodDB){
+      //System.out.println(i.name +", "+ i.nickel);
+    //}
     
   }//end main()
 
@@ -236,67 +294,71 @@ class Main{
   //HELPER METHODS
 
   /*
-  reads first line of text file, returns it
-  @param theFileName - string, should be .txt
-  @return String - first line of file
-  */
-  private static String readFirstLine(String theFileName){
-    String stLine = "";
+   * reads line of text file at line N, returns it
+   * @param theFileName - string, should be .txt
+   * @return String - nth line of file (returns null if file DNE)
+   */
+  public static String readNthLine(String theFileName, int line){
+    String nthLine = "";
     try {
-      //connect to file, buffer
+      //connect to file
       FileReader reader = new FileReader(theFileName);
       BufferedReader rBuffer = new BufferedReader(reader);
 
-      //for i in x-1; readline, discard
-      //to read Nth line
+      //to read Nth line, skip others
+      for(int x = 0; x < line-1;x++) {
+        rBuffer.readLine(); //don't need to save to var, faster to skip
+      }
 
-      //do{
-        //System.out.println(newLine); debug
-        stLine = rBuffer.readLine(); //read only the 1st line
-      //}while (fileNum != null);
-      System.out.println("1st line: " + stLine); //debug
+      nthLine = rBuffer.readLine(); //read only the one line
+      //System.out.println("line " + line + ": " + nthLine); //debug
 
       reader.close();
       rBuffer.close();
 
     }catch(Exception ex){
-      System.out.println(ex.getMessage());
+      //System.out.println(ex.getMessage());
     }
-    return stLine;
+    return nthLine; //string or null
   }
 
 
   /*
-  write new food log file
-  updates numDays.txt
-  @param userAdvice - string given from advice()
-  @param thresh - double, user nickel thresh
-  @param totNik - double, total nickel consumed
-  @param eachFood - list of foods eaten in the day
-  void
-  */
-  private static void newLog(String userAdvice, double thresh, double totNik, ArrayList<Food> eachFood){
-    //READ INT TO MAKE FILE NAME
-    int fileNum = Integer.parseInt(readFirstLine("numDays.txt"));
+   * writes new food log file, day[x].txt
+   * pRoCeDuRaLlY gEnErAtEd
+   * Format:
+   * [date]
+   * [advice]
+   * [total nickel]
+   * [food1 name]
+   * [food1 nickel]
+   * etc.
+   * @param userAdvice - string given from advice()
+   * @param thresh - double, user nickel thresh
+   * @param totNik - double, total nickel consumed
+   * @param eachFood - list of foods eaten in the day
+   * void
+   */
+  private static void newLog(String userAdvice, double thresh, double totNik, ArrayList<Food> eachFood, int fileNum){
     
     try {
       
       //format: date-advice-totnik-userthresh-allfoods
-
-      //WRITE
       //File name
-      String logName = "day" + fileNum + ".txt";
-      //connect to file, buffer
+      String logName = "day" + (fileNum+1) + ".txt"; //the NEXT file
+      
+      //connect/generate file
       FileWriter writer = new FileWriter(logName);
       BufferedWriter buffer = new BufferedWriter(writer);
 
       //find date
       String today = java.time.LocalDate.now() + "";
-
+      //System.out.println(today+" "+ logName + fileNum); //debug
+      
       //write date
       buffer.write(today);
       buffer.newLine();
-
+      
       //write advice (userAdv)
       buffer.write(userAdvice);
       buffer.newLine();
@@ -304,7 +366,8 @@ class Main{
       //write total nickel
       buffer.write(totNik+"");
       buffer.newLine();
-
+      
+      
       //write foods|nickel.. until none left
       for(Food i:eachFood){
         buffer.write(i.name);
@@ -313,32 +376,23 @@ class Main{
         buffer.newLine();
       }
       
-      
-      //rewrite to numDays, save num of files
-
-      writer.close(); //reset
-      writer = new FileWriter("numDays.txt");
-      //buffer = new BufferedWriter(writer);
-
-      buffer.write(++fileNum + "");
-
-      buffer.close(); //close
-      writer.close();
+      buffer.close();
+      writer.close(); 
 
     }catch(Exception ex){
-      System.out.println(ex.getMessage());
+      //System.out.println("error: "+ex.getMessage());
     }//end write
   }
 
 
   /*
-  add previous file contents to ArrayList (READ file)
-  @param allFood - arraylist of foods, to be modified
-  @return arraylist<food> - modified allFood
-  */
-  private static ArrayList<Food> readDB(ArrayList<Food> allFood){
+   * add previous file contents to ArrayList 
+   * (READ database.txt)
+   * @return arraylist<food> - all from database.txt
+   */
+  private static ArrayList<Food> readDB(){
 
-    
+    ArrayList<Food> allFood = new ArrayList<Food>();
     try {
       //connect to file, buffer
       FileReader reader = new FileReader("database.txt");
@@ -366,12 +420,12 @@ class Main{
 
 
   /*
-  gives advice based on what foods eaten
-  @param allFood - complete arraylist of meals for analysis
-  @param threshhold - double, if over thresh, check what user could do
-  @param fullTally - double, allFood.tallyNickel
-  @return help - string of advice from given data
-  */
+   * gives advice String based on what foods eaten
+   * @param allFood - complete arraylist of meals for analysis
+   * @param threshhold - double, if over thresh, check what user could do better
+   * @param fullTally - double, allFood.tallyNickel
+   * @return help - string of advice from given data
+   */
   private static String advice(ArrayList<Meal> allFood, double threshhold, double fullTally){
     
     //init vars
@@ -383,11 +437,14 @@ class Main{
 
     for(Meal i: allFood){
 
+      //make full food ArrayList from each meal
       for(Food x:i.mealFoods){
-        foodList.add(x); //make full food ArrayList from each meal
+        foodList.add(x); 
       }
+
+      //find max-highest nickel meal
       if(i.tallyNickel() > mostNickel.tallyNickel()){
-        mostNickel = i; //find max
+        mostNickel = i; 
       }
 
       if(i.title.equals("Snacks")){
@@ -396,6 +453,7 @@ class Main{
 
     }
 
+    //under thresh
     if (fullTally <= threshhold){
       return "Everything's under control. Nice!";
 
@@ -416,14 +474,14 @@ class Main{
       }
 
     }
-  }
+  }//end advice()
   
 
   /*
-  calculates most common food in arraylist
-  @param theFoods - arraylist of foods, items will be counted
-  @return most common Food times # servings
-  */
+   * calculates most common food in arraylist
+   * @param theFoods - arraylist of foods, items will be counted
+   * @return most common Food - name, nickel * servings
+   */
   private static Food foodMode(ArrayList<Food> theFoods) {
 
     Food mode = new Food("",0);
@@ -450,68 +508,57 @@ class Main{
 
 
   /*
-  Asks for (+) decimal input, gets input
-  @param input - string, to chekc if double
-  @return string - "ok"/not num/not pos (debug lines)
-  */
+   * checks if input is positive decimal, returns debug lines
+   * @param input - string, to check if double
+   * @return string - "ok"/not num/not pos (debug lines)
+   */
   public static String checkPosDouble(String input){
-    try{
-	  //input = Integer.parseInt(keyboard.nextLine());        
-	  if(Double.parseDouble(input) >= 0){ //if positive, end
-	    return "ok";
-	  }else{
-	    //System.out.print("Value must be positive, retry: ");
-	    return "Must be more than 0";
+
+    try{      
+      if(Double.parseDouble(input) >= 0){ //if positive, end
+        return "ok";
+      }else{
+        return "Must be more than 0";
 	    }
     }catch(NumberFormatException ex){
-      //System.out.print("Invalid input, retry: ");
-      return "Not an number, retry"; //retry
+      return "Not an number, retry"; 
     }
   }//end checkposdouble()
     
 
 
   /*
-  bulletproofing of time string for Snack constructor
-  //SHOULD USE GUI LATER - maybe pop-up window?
-  @param time - String, to check if in valid format
-  @return debug string -"ok" means valid - HH:MM, 24-hr time
-  */
+   * bulletproofing of time string for Snack constructor
+   * checks if input is correct format
+   * @param time - String, user input? - to check if in valid format
+   * @return debug string -"ok" means valid - HH:MM, 24-hr time
+   */
   private static String validTime(String time){
     
-    //while(true){
-      try{
-        //System.out.println("Input time, 00:00-23:59:"); //input time
-        //String time = keeb.nextLine();
-        
-        if(time.length() != 5){//prevent index OOB except
-          return "input is too long or short";
-          //continue;//retry
-        }else if(time.charAt(2)!= ':'){
-          return "3rd character must be a ':'";
-          //continue;
-        }else if(Integer.parseInt(time.substring(0,2)) < 0 || Integer.parseInt(time.substring(0,2)) > 23){
-          return "invalid hours";
-          //continue;
-        }else if(Integer.parseInt(time.substring(3,5)) < 0 || Integer.parseInt(time.substring(3,5)) > 59){
-          return "invalid minutes";
-          //continue;
-        }else if(time.charAt(0) == '-' || time.charAt(3) == '-'){
-          return "Cannot be -0";
-          //continue;
-        }
+    try{
+      
+      if(time.length() != 5){//prevent index OOB except
+        return "Input is too long or short";
 
+      }else if(time.charAt(2)!= ':'){
+        return "3rd character must be a ':'";
 
-        return "ok"; //basically else, is valid
+      }else if(Integer.parseInt(time.substring(0,2)) < 0 || Integer.parseInt(time.substring(0,2)) > 23){
+        return "Invalid hours (00-23)";
 
-      }catch(NumberFormatException numberFormatException){
-        return "HH:MM, HH is integer between 00-23, MM between 00-59";
-        //continue;
-      //}catch(IndexOutOfBoundsException oob){
-      //  System.out.println("oob");
+      }else if(Integer.parseInt(time.substring(3,5)) < 0 || Integer.parseInt(time.substring(3,5)) > 59){
+        return "Invalid minutes (00-59)";
+
+      }else if(time.charAt(0) == '-' || time.charAt(3) == '-'){
+        return "Cannot be '-0'";
       }
-    //}
 
-  }
+      return "ok"; //basically else, is valid
 
-}
+    }catch(NumberFormatException numberFormatException){
+      return "HH:MM, HH is integer from 00-23, MM from 00-59";
+    }//end try..catch
+
+  }//end validTime()
+
+}//--EOF--

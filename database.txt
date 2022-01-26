@@ -1,20 +1,1482 @@
-ban
-10
-app
-35
-pot
-100
-red
-11.0
-kiwi
-22.0
-Fries
+acai juice
+12.5
+agar
+1.2
+agathi leaves
+57.8
+alfalfa seeds
+169.5
+alfalfa sprouts
+21.81666667
+allspice
+0.41
+almond milk
+4.125
+almond oil
+0.254
+almonds
+26.72325
+aloe juice
+4.75
+amaranth leaves
+19.89
+amaranth, black, raw
+155.25
+amaranth, raw
+14.49
+anchovy paste
+2.15625
+anise
+1.99
+annatto
+0.3225
+apple
+3.198633645
+apple juice, canned or bottled
+4.238927376
+applesauce
+2.434843817
+apricot
+23.8
+apricot juice
+10.99
+apricot, canned
+19.44901961
+arecanut
+32.25
+arracacha
+26.4
+artichoke
+12.75
+arugula/rocket
+24.65
+asafoetida
+0.26
+ash gourd
+6.8
+asparagus
+27.234
+asparagus, canned
+18.76333333
+asparagus, cooked
+15.43489961
+avocado
+48.36140351
+avocado oil
+0.638442949
+bacon
+5.391225001
+bacon, cooked
+0.906333333
+bael fruit
+46.9
+bagel
+6.663895913
+baguette
+2.67
+baking powder
+0.689043277
+baking soda
+1.022
+bamboo shoot
+6.8
+banana
+8.165334204
+banana chips
+4.8
+barley malt, dried
+15.9
+barley, cooked
+12.81629973
+barley, raw
+13.05
+basil, dry
+1.465
+basil, fresh
+3.6675
+bathua leaves
+6.8
+bbq sauce
+4.5
+bean sprouts
+20.215
+beans, black, cooked
+112.0
+beans, brown, dried
+85.1375
+beans, canned
+36.58666667
+beans, chickpea, canned
+21.16
+beans, chickpea, cooked
+34.28
+beans, chickpea, dried
+65.24
+beans, cooked
+30.6227
+beans, dried
+68.37727273
+beans, fava, dried
+14.0
+beans, fava, fresh
+42.2
+beans, fresh
+31.9
+beans, kidney, canned
+38.0
+beans, kidney, dried
+90.18333333
+beans, lentil, canned
+28.6
+beans, lentil, cooked
+66.96
+beans, lentil, dried
+79.84375
+beans, lima, cooked
+45.84170213
+beans, mung, dried
+78.05
+beans, pigeon peas, dried
+62.825
+beans, pigeon peas, fresh
+96.8
+beans, pinto, cooked
+51.38893617
+beans, runner
+17.2125
+beans, soya, dried
+121.5666667
+beans, urad, dried
+85.75
+beans, white, canned
+30.4
+beans, white, cooked
+25.79914894
+beans, white, dried
+82.775
+bechamel sauce
+2.046
+beef
+1.941210527
+beef, cooked
+8.821479601
+beef, cured
+2.1
+beer
+4.696376778
+beet greens
+17.0
+beets
+8.8134375
+beets, canned
+4.98108
+beets, cooked
+9.318674318
+betel leaves
+39.525
+bishop's weed
+1.595
+bitter leaf
+1.275
+bitter melon
+18.275
+black pudding
+4.956918821
+black pudding, cooked
+0.949019486
+blackberries
+21.6
+blueberries
+6.986232475
+bok choy
+6.035
+bottle gourd
+9.916666667
+bouillon powder
+6.593333333
+brazil nuts
+94.2
+bread, barley
+7.14350003
+bread, fruited
+11.27499999
+bread, gluten-free
+12.30065625
+bread, multigrain
+15.69947759
+bread, oat
+35.47387505
+bread, rye
+8.043150913
+bread, seeded
+28.30049239
+bread, white
+6.456848067
+bread, whole wheat
+13.21861551
+breadcrumbs
+3.0345
+breadfruit
+2.053333333
+breadfruit, dried
+0.48
+broccoli
+10.52618754
+broccoli, canned
+6.5
+broccoli, composite
+10.38649448
+broccoli, cooked
+9.190058623
+broth
+11.15086776
+brussels sprouts
+15.87954545
+brussels sprouts tops
+24.65
+brussels sprouts, composite
+3.225
+brussels sprouts, cooked
+9.612946342
+buckwheat crackers
+59.1644989
+buckwheat, raw
+121.5
+butter
+0.372833311
+buttermilk
+6.3089687
+cabbage
+8.651249999
+cabbage, canned
+4.713150056
+cabbage, composite
+8.957330601
+cabbage, cooked
+3.520764909
+cabbage, sauerkraut
+4.25
+candy
+2.15433287
+canola/rapeseed oil 
+1.244818182
+carbonated drinks
+1.97155645
+carbonated drinks, canned
+4.534947068
+cardamom
+1.34875
+carob flour
+10.6
+carrot
+4.56994
+carrot, composite
+7.78294042
+carrot, cooked
+5.605625496
+cashews
+171.3375
+cassava
+32.63333333
+cassava, cooked
+65.0465
+cauliflower
+6.569437501
+cauliflower leaves
+11.05
+cauliflower, composite
+10.98647214
+cauliflower, cooked
+8.477636207
+cayenne pepper
+5.833333333
+celeriac
+4.964
+celery
+3.027397262
+celery, composite
+1.964957318
+celtuse/chinese lettuce
+3.655
+cereal bar
+21.05838937
+cereal bar, rice
+7.35
+cereal bar, with chocolate
+17.28125
+cereal grain beverage
+21.9771875
+chard
+10.5825
+chayote
+34.85
+cheeses
+1.350663449
+cherries
+4.059026755
+cherry juice
+2.392500043
+chervil
+0.063
+chestnuts
+12.6
+chewing gum
+2.115115309
+chia seeds
+75.75
+chicken, turkey and other poultry
+3.555950896
+chicken, turkey and other poultry, cooked
+5.069297522
+chicken, turkey and other poultry, cured
+1.845899963
+chives
+0.75
+chocolate
+63.89589319
+chocolate confections
+37.14871371
+chocolate confections with nuts
+21.7108695
+chocolate hazelnut spread
+15.09503975
+chocolate milk
+21.37292313
+chocolate milkshake
+46.43229167
+chutney
+1.258575001
+cider
+2.8305
+cilantro
+0.7575
+cinnamon
+1.0453125
+citrus fruits, unspecified
+6.004731771
+citrus juice
+3.37887931
+citrus juice, canned
+4.036604759
+citrus juice, from concentrate
+7.119983006
+cloudberries
+15.2
+cloves
+0.42
+cocoa butter
+0.816666667
+cocoa mass
+28.975
+cocoa powder
+46.36590909
+coconut
+100.1
+coconut milk, canned
+10.4187825
+coconut oil
+2.195
+coconut water
+89.0625
+coconut, dried
+24.44625
+coffee, beans
+10.19666667
+coffee, brewed
+3.683376907
+cold cereal, corn
+3.531804763
+cold cereal, granola/muesli
+48.39892
+cold cereal, oat ring
+32.43139898
+cold cereal, rice
+2.789117647
+cold cereal, wheat bran
+5.758657795
+cold cereal, wheat bran with raisins
+6.169787234
+cold cereals, junk food
+12.20342059
+collard greens
+25.5
+collard greens, cooked
+5.96375
+confections with nuts
+53.26874962
+cookies with chocolate
+16.14201025
+cookies with chocolate and nuts
+40.0
+cookies with nuts
+15.6
+cookies, not chocolate
+2.243694814
+coriander seeds
+0.695
+corn
+8.18746152
+corn chips
+10.52675464
+corn oil
+0.259
+corn, canned
+5.65
+corn, cooked
+4.872987939
+corn/glucose syrup
+9.0
+cornmeal
+14.4
+cottage cheese
+2.83416611
+cottage cheese bars, sweet
+9.338280106
+cottonseed oil
+0.3225
+crackers
+3.818122477
+crackers, butter-type
+2.22125
+crackers, saltine or cream
+2.289375
+crackers, seeded
+6.75
+cranberries
+4.73
+cream
+0.292302572
+cream cheese
+0.580526316
+cream, non-dairy
+0.4359375
+crème fraîche
+1.246422222
+crispbread
+6.706875
+croissant-like pastries
+7.315
+cucumber
+3.269390507
+cultured milk
+2.666456869
+cumin
+1.412142857
+currants, red or black
+6.630956535
+curry leaves
+1.395
+curry leaves, dry
+0.869
+dates, fresh
+21.0
+dill, fresh
+0.26775
+dips, dairy-based
+1.412266842
+dragon fruit
+14.0
+dressings
+5.644381131
+dried apricots
+32.03333333
+dried cherries
+1.2
+dried currants
+8.0290802
+dried dates
+12.24
+dried figs
+47.7
+dried fruit and nuts
+55.0
+dried fruit, mixed
+16.23379917
+dried rosehips
+16.0
+dried strawberry
+4.379199982
+drumstick
+9.35
+drumstick leaves
+20.4
+eel
+7.991071429
+eel, smoked
+0.649
+egg
+1.489828572
+egg powder
+4.466666667
+egg, cooked
+2.937632524
+eggplant
+8.261314516
+eggplant, cooked
+1.95624
+elderberries
+3.948
+emulsifer
+0.204
+en choy (chinese spinach), cooked
+20.8
+energy drink
+34.5099375
+english muffin
+4.852604167
+evaporated milk
+0.658564594
+fennel
+28.9
+fennel, dry
+5.545
+fenugreek
+0.9825
+fenugreek leaves
+28.9
+fermented bean products
+75.65
+fig
+18.2
+fish
+7.801059265
+fish, canned
+1.393884263
+fish, canned, tomato sauce
+3.002083333
+fish, cooked
+7.6591482
+fish, pickled
+2.36335
+fish, roe
+0.591666667
+fish, salted or smoked
+3.328085107
+flatbread
+5.431275937
+flaxseed
+57.3
+flour, almond
+28.6
+flour, barley
+4.0
+flour, buckwheat
+31.425
+flour, cassava
+11.6925
+flour, millet
+36.0
+flour, oat
+50.25
+flour, potato
+0.9
+flour, rice
+25.57
+flour, rye
+2.831250007
+flour, rye, whole
+3.502500014
+flour, soy
+51.0
+flour, spelt
+4.005
+flour, spelt, whole
+11.88
+flour, teff
+18.45
+flour, white
+2.076756428
+flour, whole wheat
+7.122857143
+fluted pumpkin leaves
+20.4
+fructose
+0.12
+fruit drink
+2.403512739
+fruit gums
+0.8
+fruit jams
+1.604405088
+fruit jelly
+0.496547449
+fruit juice, concentrated
+3.859375
+fruit juice, various, canned or bottled
+8.777341265
+gai lan (chinese kale/broccoli), cooked
+31.2
+garden cress
+35.7
+garlic
+0.832229538
+garlic, dry
+0.62392
+gboma leaves
+15.555
+gelatin dessert
+1.623268839
+ghee
+6.566923077
+ginger, dry
+0.608714286
+ginger, fresh
+0.3375
+goat
+12.5
+gogu leaves
+42.5
+goji berries
+48.0
+goji juice
+25.0
+gooseberries
+4.4384
+graham crackers
+2.920851064
+grape
+5.068647276
+grape juice
+4.646909485
+grapefruit
+5.222241377
+grapefruit juice
+5.848404256
+grapeseed oil
+0.495
+gravy
+8.685061219
+green beans
+19.00600001
+green beans, canned
+11.85166667
+green beans, cooked
+18.56432273
+green tea, brewed, bag
+14.84077222
+green tea, brewed, loose
+18.07425313
+green tea, leaves
+18.09
+ground beef and/or pork
+2.875
+ground beef and/or pork, cooked
+26.56218966
+guacamole
+2.1
+guava
+13.2552
+hairy gourd, cooked
+15.21
+hazelnut oil
+0.486
+hazelnuts
+52.34892857
+head/iceberg lettuce
+11.0938421
+hemp seeds
+198.0
+herbs and spices, unspecified
+0.939134922
+herbs de provence, dry
+1.6275
+hollandaise sauce
+0.417569983
+holy basil
+0.09
+honey
+2.701033264
+horse
+10.41666667
+horseradish
+1.2625
+hot cereal, 4-grain, cooked
+64.04255214
+hot cereal, buckwheat
+85.50849915
+hot cereal, corn, cooked
+7.520571668
+hot cereal, millet, cooked
+65.86493856
+hot cereal, oat, cooked
+79.01621882
+hot cereal, rice, cooked
+7.707620004
+hot cereal, rice, dry
+9.866666667
+hot cereal, rye, cooked
+11.01079299
+hot cereal, rye, dry
 12.0
-Ramon Noodles
-15.0
-Cookies
-10.0
-apples
-0.24
-been
-23.0
+hot cereal, wheat, cooked
+6.672450356
+hot cereal, wheat, dry
+7.44
+hot chocolate
+44.78614262
+hot chocolate powder
+31.25
+hot peppers
+10.48
+hot peppers, dried
+4.076
+hummus
+17.3
+ice cream desserts
+16.15785945
+ice cream desserts, soy
+29.67
+ice cream, vanilla
+1.686630245
+iced tea
+10.88437495
+instant coffee
+2.63
+jack fruit
+9.1
+jambu fruit
+22.4
+jews mallow leaves
+4.25
+jujube
+12.845
+kale
+11.78666667
+karonda fruit
+14.0
+ketchup
+1.440555556
+kiwi
+7.240522575
+kohlrabi
+5.1
+kohlrabi leaves
+15.3
+kovai gourd
+6.8
+lactose powder
+0.01428
+lamb
+2.930434777
+lamb, cooked
+8.816331542
+lard
+0.425000007
+leaf chicory (endive or radicchio)
+25.075
+leek
+5.4655
+lemon / lime
+5.032499992
+lemon balm
+3.005
+lemon juice
+0.239166663
+lemonade
+1.709558825
+lettuces
+6.263989244
+licorice
+18.7
+linden inflorescence, dry
+0.4225
+lingonberries
+3.754285714
+liquor
+0.8403
+lotus root
+15.1725
+lunch meat
+1.772172408
+lunch meat, canned
+2.100992945
+lychee
+21.0
+macadamia nuts
+42.0
+mace
+1.295
+madeira
+0.3
+mahaleb cherry
+0.765
+malabar spinach
+37.4
+malt drink
+16.25
+mango
+6.620366667
+mango ginger
+0.165
+mango juice
+2.779166667
+mango powder
+0.66
+mangosteen juice
+25.0
+maple syrup
+17.4
+margarine
+1.190551861
+marjoram, dry
+1.84
+marzipan
+9.6
+mayonnaise
+0.315477345
+meat jellies
+2.999999971
+melons
+11.50497794
+milk
+3.433587853
+milk powder
+4.944166667
+millet, raw
+43.6
+mint leaves
+0.63
+mint, dry
+1.7
+mithun
+45.83333333
+molasses
+1.008956
+mung bean vermicelli, cooked
+2.88
+mushroom, canned
+17.42
+mushroom, composite
+1.466351446
+mushroom, cooked
+4.881499932
+mushrooms
+3.61095381
+mustard
+0.50995098
+mustard leaves
+9.4775
+mustard oil
+0.535
+mustard seed
+0.255
+mutton
+6.2875
+mutton, cooked
+18.22727273
+nettle leaves
+42.5
+nettles, cooked
+5.59
+nigella seeds
+2.133
+niger seeds
+82.5
+nutmeg
+0.903833333
+nuts, mixed
+70.53660442
+oak bark, dry
+1.02
+oat bran
+18.0
+oat-based beverage
+32.0
+oats, raw
+54.16363636
+okra
+25.5
+okra, cooked
+6.082916667
+olive oil
+0.506946914
+olives
+1.34481
+omum, dry
+1.48
+onion
+3.263335938
+onion, cooked
+5.198777049
+onion, dried
+0.17
+orange
+6.390363634
+oregano, dry
+4.9025
+oregano, fresh
+5.259
+organ meats
+7.797025462
+organ meats, cooked
+5.203940116
+organ meats, cured
+1.25
+oyster sauce
+1.125
+palm oil
+0.415
+paneer/khoa/halloumi
+14.66666667
+papaya
+11.102
+paprika
+0.823875
+parsley root
+9.435
+parsley, dry
+0.6
+parsley, fresh
+1.957240909
+parsnip
+19.72
+passionfruit
+32.2
+passionfruit juice
+10.5525
+pasta, cooked
+7.55832857
+pasta, dry
+10.7015
+pasta, gluten-free, dry
+29.75
+pasta, rice, cooked
+5.375
+pasta, whole wheat, cooked
+16.356125
+pasta, whole wheat, dry
+15.87375
+pate
+5.565989043
+peach juice
+8.466666667
+peach or nectarine
+12.98439581
+peanut butter
+10.15831545
+peanut oil
+0.763333333
+peanuts
+31.68
+pear
+9.052928964
+pear juice
+8.43875
+peas
+37.76428571
+peas, canned
+37.18
+peas, cooked
+29.04238918
+peas, dried
+52.08
+pecans
+170.4
+pepper, black
+2.484583333
+peppermint, dry
+1.66
+peppers
+7.022942594
+peppers, composite
+16.24094643
+persimmon
+29.96
+pesto made with nuts
+28.8
+pesto, no nuts
+1.549842024
+phalsa
+8.4
+phyllo
+1.575
+pickles
+1.180511538
+pine nuts
+67.97142857
+pineapple
+17.44895382
+pineapple juice
+11.7625
+pineapple juice, from concentrate
+28.71808511
+pistachios
+22.22666667
+plantain, cooked
+15.80933333
+plantain, flower
+7.65
+plantain, green
+4.25
+plantain, stem
+2.55
+plum
+27.01618182
+plum juice
+4.385
+plumed cockscomb leaves
+15.3
+pointed gourd
+10.2
+pomegranate
+4.0
+pomegranate juice
+25.0
+pomegranate seed
+1.05
+pomelo
+6.486666644
+ponnaganni (leaves)
+34.85
+popcorn
+14.67005419
+poppy seeds
+39.0
+popsicle
+0.526595745
+pork
+3.239649133
+pork rinds
+1.83
+pork, cooked
+7.693041194
+pork, cured
+1.2
+pork, cured, cooked
+20.64422318
+port
+3.0
+potato
+9.710300005
+potato chips
+7.758411932
+potato, cooked
+8.360325844
+potato, cooked with skin
+12.81095767
+potato, french fried
+12.40249173
+potato, instant
+3.1875
+potato, instant, prepared
+5.717600155
+pretzels
+3.765625002
+processed cheese
+2.236394316
+prune juice
+34.80208333
+prunes
+21.45
+pudding, chocolate
+16.9
+pudding, not chocolate
+11.17723404
+puff pastry
+1.243522496
+pumpkin
+16.72375
+pumpkin leaves
+22.95
+pumpkin seed oil
+0.315
+pumpkin seeds
+40.07
+pumpkin, canned
+6.5
+pumpkin, cooked
+60.98733333
+pumpkin, marinated
+6.5
+quark
+1.509533348
+quinoa, cooked
+7.42
+quinoa, raw
+20.826
+rabbit
+1.46875
+rabbit, cooked
+0.600000024
+radish
+4.659545455
+radish leaves
+21.25
+raisins
+3.819210639
+raisins, yogurt candy coated
+2.592
+ramen noodle powder
+4.875
+raspberries
+20.39741817
+relish
+0.45
+rhubarb
+18.7845
+rice cakes
+5.1
+rice milk
+6.605218738
+rice oil
+0.55
+rice paper
+0.22155
+rice, black, raw
+3.15
+rice, brown, cooked
+6.339666667
+rice, brown, raw
+12.447
+rice, white, cooked
+7.065959493
+rice, white, raw
+10.881945
+rice, wild, raw
+148.5
+ridge gourd
+11.05
+rolls and biscuits
+5.973733626
+rolls, multigrain
+15.56298329
+rolls, multigrain with fruit
+23.09356518
+rolls, oat
+10.68270473
+rolls, seeded
+10.725
+rosehip powder
+1.2
+rosehips
+32.0
+rosemary, fresh
+2.295
+rowanberries
+8.0
+rumex leaves
+17.0
+rusk, plain or fruited
+3.988415012
+rutabaga
+4.808571429
+rutabaga, cooked
+14.42436582
+rye kernels, whole/cracked
+3.501
+safflower seeds
+15.9
+saffron
+0.06325
+sage, dry
+3.1925
+salsa
+7.983673469
+salsify
+4.080000081
+salt
+0.044712143
+sapota
+40.6
+sausage
+1.561880359
+sausage, cooked
+4.521582823
+savoury crisps
+9.228087491
+seaweed
+33.6380625
+seaweed, boiled
+17.2575
+seeds
+33.15
+seitan
+8.4
+semolina
+5.498999996
+sesame oil
+1.543333333
+sesame seeds
+26.79230769
+shellfish, clams
+46.95833333
+shellfish, crustaceans
+11.5825
+shellfish, crustaceans, canned
+1.5389
+shellfish, crustaceans, cooked
+2.719971879
+shellfish, mussels
+108.6442308
+shellfish, mussels, canned
+45.7875
+shellfish, mussels, cooked
+72.91578947
+shellfish, mussels, pickled
+78.925
+shellfish, octopus
+5.062500015
+shellfish, octopus, cooked
+2.5
+shellfish, oysters
+28.08333333
+shellfish, oysters, canned
+27.5
+shellfish, oysters, cooked
+13.0
+shellfish, oysters, smoked
+1.375
+shellfish, scallops
+285.8333333
+shellfish, scallops, cooked
+16.83333333
+shellfish, squid
+4.40625
+shellfish, squid, cooked
+4.4
+sherbet/sorbet
+2.972489362
+sherry
+14.175
+shortening
+11.89571429
+snacks, corn-based
+15.5
+snacks, fried chickpea
+130.0
+snacks, potato-based
+19.0
+snake gourd
+10.2
+snow pea
+13.005
+soft drink syrup
+0.804
+sorghum
+26.55
+sour cream
+0.368680851
+soy mayonnaise
+6.599505043
+soy milk
+50.71223071
+soy sauce
+5.893768426
+soya flakes
+143.5
+soya sausage
+12.375
+soybean oil
+0.974
+spelt, raw
+12.3354
+spinach
+14.2109375
+spinach, canned
+20.28
+spinach, composite
+8.021539239
+spinach, cooked
+7.207836735
+sponge gourd, cooked
+15.6
+spring onion
+5.973333333
+squash
+12.63666667
+st. john's wort, dry
+0.985
+star fruit
+39.2
+starch, corn
+1.5
+starch, potato
+0.325
+starch, rice
+1.1
+strawberries
+9.308846506
+strawberry juice
+3.68
+strawberry milk
+0.875
+sugar, brown
+0.393777778
+sugar, white
+0.082518035
+sugarcane juice
+5.0
+sumac
+0.63125
+sunflower oil
+0.458818182
+sunflower seeds
+98.64283618
+sweet and sour sauce 
+2.57715
+sweet potato
+17.82
+sweet potato, canned
+14.60717021
+sweet potato, cooked
+38.577
+sweetened evaporated milk
+2.16
+syrup, carob
+33.0
+syrup, chocolate 
+53.98205997
+syrup, not chocolate
+2.190158994
+tamarind
+0.48
+tangerine or mandarin orange
+8.192333317
+taro leaves
+22.1
+taro root
+38.5
+taro stem
+8.925
+taro, cooked
+28.056
+tartar sauce
+15.101636
+tea, brewed
+15.86673817
+tea, brewed, bag
+8.96973418
+tea, brewed, loose
+5.937905612
+tea, herbal, brewed
+6.898255814
+tea, herbal, dry
+33.4335
+tea, instant
+46.5
+tea, leaves
+59.59039606
+teriyaki sauce
+3.45
+thyme, dry
+3.273
+tinda gourd
+10.2
+tofu
+200.2883333
+tomato
+2.435973649
+tomato juice
+14.16666667
+tomato juice, bottled
+19.04255319
+tomato juice, canned
+14.75
+tomato paste
+10.47857143
+tomato sauce
+6.052995918
+tomato, canned
+18.01205714
+tomato, composite
+2.054655881
+tomato, sun-dried
+9.3
+turmeric powder
+0.4075
+turnip
+5.39750002
+turnip, cooked
+2.732708333
+tvp (texturized vegetable protein)
+127.0
+vanilla extract
+0.02358675
+vanilla milkshake
+13.75
+veal
+4.428571429
+veal, cooked
+5.225336349
+vegetable juice
+18.62500012
+vegetable juice, canned
+16.34544684
+vegetable oils, unspecified
+0.355538117
+vekao powder
+6.9
+venison
+1.927884615
+venison, cooked
+1.733333305
+venison, cured
+0.495
+vermouth
+2.799
+vinegar
+1.26
+walnuts
+68.45181818
+wasabi, dry
+0.35375
+water chestnut
+9.35
+water leaf
+16.15
+water spinach, cooked
+7.02
+water, bottled
+5.912977331
+water, tap
+1.554009406
+watercress
+17.51
+watermelon
+9.663050847
+wax gourd
+3.06
+wax gourd, cooked
+5.72
+wheat bran
+9.86875
+wheat germ
+10.725
+wheat gluten
+1.875
+wheat kernels/bulgur
+9.375075
+whey drink
+5.384125002
+whey powder
+20.0
+whipped cream
+0.0580875
+white chocolate
+5.52
+wild boar
+4.921875
+wine
+5.765012196
+winter squash, cooked
+12.52702128
+xylitol
+0.042
+yam
+17.6
+yam, cooked
+18.036
+yeast
+0.098460328
+yeast dough
+3.980292758
+yogurt
+4.752417481
+yogurt drink
+1.819737446
+yogurt, with fruit
+4.773577474
+zucchini
+9.817499984
+zucchini, cooked
+6.259861405
