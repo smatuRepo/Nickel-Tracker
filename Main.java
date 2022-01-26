@@ -2,7 +2,7 @@
  * Ver. 2.0.1
  * Jonathan, Simon
  * Nickel Tracker: Tracker of Nickel
- * Nov. 15, 2021 - Jan. 26, 2022 part II
+ * Nov. 15, 2021 - Jan. 26, (2021, part II: Electric Boogaloo)
 */
 
 import java.util.*;

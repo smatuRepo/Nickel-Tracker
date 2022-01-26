@@ -909,7 +909,7 @@ oregano, fresh
 organ meats
 7.797025462
 organ meats, cooked
-5.203940116
+5.203940115
 organ meats, cured
 1.25
 oyster sauce
